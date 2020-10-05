@@ -1,6 +1,7 @@
 package simulator;
 
-import controller.Controller;
+import controller.MainController;
+import controller.SimulatorController;
 import controller.Tracker;
 import eduni.distributions.*;
 
@@ -24,17 +25,17 @@ public class Engine extends Thread {
 
 	private ArrivalProcess arrivalProcess;
 	private EventList eventList;
-	private Controller controller;
+	private SimulatorController mainController;
 
 	//Stats
 	private ArrayList<VirusSample> simualtedSamples = new ArrayList<>();
 	private int enteredSamples = 0;
 	
 
-	public Engine(Controller controller){
+	public Engine(SimulatorController mainController){
 		System.out.println("Engine ctor");
 		Trace.setTraceLevel(Trace.Level.ERR);
-		this.controller = controller;
+		this.mainController = mainController;
 
 		servicepoints[0] = new Servicepoint(0, "Virus sample submission", new Uniform(1, 5), this, EventType.DEP1, false);
 		servicepoints[1] = new Servicepoint(1, "Backend scan", new Uniform(4, 8), this, EventType.DEP2, false);
@@ -55,7 +56,7 @@ public class Engine extends Thread {
 	}
 
 	public Tracker getTracker(){
-		return this.controller.getTracker();
+		return this.mainController.getTracker();
 	}
 
 	public void setSimulointiaika(double aika) {

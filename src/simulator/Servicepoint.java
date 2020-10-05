@@ -39,14 +39,16 @@ public class Servicepoint {
 
 
 	public void lisaaJonoon(VirusSample a){
-		this.engine.getTracker().setCircleStatus(this.serviceID);
+		this.engine.getTracker().setCircleStatus(this.serviceID, true);
 		jono.add(a);
+		this.engine.getTracker().setServicepointLabel(this.serviceID, jono.size());
 	}
 
 	public VirusSample otaJonosta(){
 		if(this.jono.size() == 1){
-			this.engine.getTracker().removeCircleStatus(this.serviceID);
+			this.engine.getTracker().setCircleStatus(this.serviceID, false);
 		}
+		this.engine.getTracker().setServicepointLabel(this.serviceID, jono.size() - 1);
 		varattu = false;
 		this.completedServices += 1;
 		return this.jono.poll();

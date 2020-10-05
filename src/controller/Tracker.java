@@ -1,57 +1,58 @@
 package controller;
 
+import javafx.animation.Animation;
 import javafx.animation.PathTransition;
+import javafx.application.Platform;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 
 
 public class Tracker {
 
 
-    private VBox vBox;
-    private Controller controller;
+    private SimulatorController simulatorController;
 
-    public Tracker(VBox vBox, Controller controller){
-        this.vBox = vBox;
-        this.controller = controller;
+    public Tracker(SimulatorController advancedSettingsController){
+        this.simulatorController = advancedSettingsController;
     }
 
-    public void setCircleStatus(int id){
+    public void setCircleStatus(int id, boolean visible){
         switch (id){
             case 0:
-                this.controller.getCircle0().setVisible(true);
+                this.simulatorController.getCircle0().setVisible(visible);
                 break;
             case 1:
-                this.controller.getCircle1().setVisible(true);
+                this.simulatorController.getCircle1().setVisible(visible);
                 break;
             case 2:
-                this.controller.getCircle2().setVisible(true);
+                this.simulatorController.getCircle2().setVisible(visible);
                 break;
             case 3:
-                this.controller.getCircle3().setVisible(true);
+                this.simulatorController.getCircle3().setVisible(visible);
                 break;
             case 4:
-                this.controller.getCircle4().setVisible(true);
+                this.simulatorController.getCircle4().setVisible(visible);
                 break;
         }
     }
 
-    public void removeCircleStatus(int id){
+    public void setServicepointLabel(int id, int queueAmount){
         switch (id){
             case 0:
-                this.controller.getCircle0().setVisible(false);
+                    this.simulatorController.setLabel0("Sample submission\nsamples: " + queueAmount);
                 break;
             case 1:
-                this.controller.getCircle1().setVisible(false);
+                    this.simulatorController.setLabel1("Backend scan\nsamples: " + queueAmount);
                 break;
             case 2:
-                this.controller.getCircle2().setVisible(false);
+                    this.simulatorController.setLabel2("Robot verification #1\nsamples: " + queueAmount);
                 break;
             case 3:
-                this.controller.getCircle3().setVisible(false);
+                    this.simulatorController.setLabel3("Robot verification #2\nsamples: " + queueAmount);
                 break;
             case 4:
-                this.controller.getCircle4().setVisible(false);
+                    this.simulatorController.setLabel4("Human verification\nsamples: " + queueAmount);
                 break;
         }
     }
@@ -60,24 +61,34 @@ public class Tracker {
         PathTransition transition = new PathTransition();
         switch (id){
             case 0:
-                this.controller.getCircle0_1().setVisible(true);
-                transition.setNode(this.controller.getCircle0_1());
+                this.simulatorController.getCircle0_1().setVisible(true);
+                System.out.println(this.simulatorController.getCircle1().getBoundsInParent());
+                System.out.println(this.simulatorController.getCircle0_1().getBoundsInParent());
+                System.out.println(this.simulatorController.getPolyline0_1());
+
+                Polyline polyline = new Polyline();
+                polyline.getPoints().addAll(new Double[]{
+                        63.0, 0.0,
+                        215.0, 0.0
+                });
+
+                transition.setNode(this.simulatorController.getCircle0_1());
                 transition.setDuration(Duration.seconds(2));
-                transition.setPath(this.controller.getLine0_1());
-                transition.setCycleCount(1);
+                transition.setPath(polyline);
+                transition.setCycleCount(Animation.INDEFINITE);
                 transition.play();
                 break;
             case 1:
-                this.controller.getCircle1().setVisible(false);
+                this.simulatorController.getCircle1().setVisible(false);
                 break;
             case 2:
-                this.controller.getCircle2().setVisible(false);
+                this.simulatorController.getCircle2().setVisible(false);
                 break;
             case 3:
-                this.controller.getCircle3().setVisible(false);
+                this.simulatorController.getCircle3().setVisible(false);
                 break;
             case 4:
-                this.controller.getCircle4().setVisible(false);
+                this.simulatorController.getCircle4().setVisible(false);
                 break;
         }
     }

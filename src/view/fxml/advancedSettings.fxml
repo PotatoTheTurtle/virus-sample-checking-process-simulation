@@ -184,7 +184,7 @@
             <ButtonBar buttonOrder="U+L_HE+FBIX_NCYOA_R" layoutX="220.0" layoutY="34.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="34.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="34.0">
               <buttons>
                 <Button alignment="CENTER" mnemonicParsing="false" onAction="#backSettings" text="Back" />
-                  <Button alignment="CENTER" mnemonicParsing="false" text="Reset" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#resetSettings" text="Reset" />
               </buttons>
             </ButtonBar>
          </children>

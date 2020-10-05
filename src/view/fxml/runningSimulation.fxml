@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polyline?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -57,33 +58,59 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Circle fill="#1f93ff00" layoutX="73.0" layoutY="188.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#1f93ff00" layoutX="225.0" layoutY="188.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#1f93ff00" layoutX="386.0" layoutY="130.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#1f93ff00" layoutX="386.0" layoutY="246.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fill="#1f93ff00" layoutX="558.0" layoutY="187.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
-            <Line fx:id="line0_1" endX="196.0" endY="188.0" startX="102.29289245605469" startY="188.0" />
-            <Line endX="244.0" endY="178.0" layoutX="10.0" layoutY="10.0" startX="347.0" startY="120.0" />
-            <Line endX="347.0" endY="236.0" layoutX="10.0" layoutY="10.0" startX="243.29290771484375" startY="178.70709228515625" />
-            <Line endX="519.0" endY="178.0" layoutX="10.0" layoutY="10.0" startX="405.0" startY="120.0" />
-            <Line endX="529.0" endY="188.0" startX="415.0" startY="246.0" />
-            <Circle fx:id="circle0" fill="DODGERBLUE" layoutX="73.0" layoutY="189.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="circle1" fill="DODGERBLUE" layoutX="225.0" layoutY="189.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="386.0" layoutY="130.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="386.0" layoutY="246.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="circle4" fill="DODGERBLUE" layoutX="558.0" layoutY="188.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="circle3_4" fill="DODGERBLUE" layoutX="386.0" layoutY="247.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="circle2_4" fill="DODGERBLUE" layoutX="386.0" layoutY="130.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="circle1_2" fill="DODGERBLUE" layoutX="225.0" layoutY="189.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="circle0_1" fill="DODGERBLUE" layoutX="73.0" layoutY="189.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="circle4_out" fill="DODGERBLUE" layoutX="558.0" layoutY="189.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
-            <Circle fx:id="circle1_3" fill="DODGERBLUE" layoutX="225.0" layoutY="189.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#1f93ff00" layoutX="78.0" layoutY="138.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#1f93ff00" layoutX="230.0" layoutY="138.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#1f93ff00" layoutX="391.0" layoutY="80.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#1f93ff00" layoutX="391.0" layoutY="196.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fill="#1f93ff00" layoutX="563.0" layoutY="137.0" radius="29.0" stroke="BLACK" strokeType="INSIDE" />
+            <Line fx:id="line0_1" endX="196.0" endY="188.0" layoutX="5.0" layoutY="-50.0" startX="102.29289245605469" startY="188.0" />
+            <Line endX="244.0" endY="178.0" layoutX="15.0" layoutY="-40.0" startX="347.0" startY="120.0" />
+            <Line endX="347.0" endY="236.0" layoutX="15.0" layoutY="-40.0" startX="243.29290771484375" startY="178.70709228515625" />
+            <Line endX="519.0" endY="178.0" layoutX="15.0" layoutY="-40.0" startX="405.0" startY="120.0" />
+            <Line endX="529.0" endY="188.0" layoutX="5.0" layoutY="-50.0" startX="415.0" startY="246.0" />
+            <Circle fx:id="circle0" fill="DODGERBLUE" layoutX="78.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle1" fill="DODGERBLUE" layoutX="230.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="391.0" layoutY="80.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="391.0" layoutY="196.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle4" fill="DODGERBLUE" layoutX="563.0" layoutY="138.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle3_4" fill="DODGERBLUE" layoutX="391.0" layoutY="197.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle2_4" fill="DODGERBLUE" layoutX="391.0" layoutY="80.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle1_2" fill="DODGERBLUE" layoutX="230.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle0_1" fill="DODGERBLUE" layoutX="78.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle4_out" fill="DODGERBLUE" layoutX="563.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="circle1_3" fill="DODGERBLUE" layoutX="230.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Polyline fx:id="polyline0_1" fill="CHARTREUSE" layoutX="138.0" layoutY="60.0" points="63.5, 78.5, 38.0, 77.5, 4.0, 77.5, -31.20709228515625, 77.5" strokeType="INSIDE" />
+            <Label fx:id="label0" layoutX="19.0" layoutY="70.0" text="Sample submission" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="label2" layoutX="332.0" layoutY="14.0" text="Sample submission" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="label3" layoutX="332.0" layoutY="225.0" text="Sample submission" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="label1" layoutX="171.0" layoutY="69.0" text="Sample submission" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="label4" layoutX="504.0" layoutY="69.0" text="Sample submission" textAlignment="CENTER">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
          </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
     </AnchorPane>
-      <AnchorPane prefHeight="214.0" prefWidth="640.0">
+      <AnchorPane prefHeight="95.0" prefWidth="640.0">
          <children>
             <ButtonBar buttonOrder="U+L_HE+FBIX_NCYOA_R" layoutX="220.0" layoutY="50.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="50.0">
               <buttons>
@@ -96,6 +123,12 @@
                   <Font size="18.0" />
                </font>
             </Label>
-         </children></AnchorPane>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></AnchorPane>
   </children>
 </VBox>

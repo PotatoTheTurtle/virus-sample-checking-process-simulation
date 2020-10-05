@@ -1,12 +1,10 @@
 package view;
 
-import controller.Controller;
+import controller.MainController;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -16,7 +14,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader mainMenuLoad = new FXMLLoader(MainApplication.class.getResource("fxml/mainMenu.fxml"));
-        mainMenuLoad.setController(new Controller(this));
+        mainMenuLoad.setController(new MainController(this));
         VBox vbox = mainMenuLoad.load();
         Scene mainMenu = new Scene(vbox);
 

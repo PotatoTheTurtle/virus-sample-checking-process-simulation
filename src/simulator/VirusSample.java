@@ -1,6 +1,5 @@
 package simulator;
 
-import controller.Controller;
 import controller.Tracker;
 
 public class VirusSample {
