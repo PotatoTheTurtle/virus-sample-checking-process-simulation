@@ -1,5 +1,6 @@
 package simulator;
 
+import controller.AdvancedSettingsController;
 import controller.MainController;
 import controller.SimulatorController;
 import controller.Tracker;
@@ -25,27 +26,36 @@ public class Engine extends Thread {
 
 	private ArrivalProcess arrivalProcess;
 	private EventList eventList;
-	private SimulatorController mainController;
+	private SimulatorController simulatorController;
+	private AdvancedSettingsController advancedSettingsController;
+	private MainController mainController;
 
 	//Stats
 	private ArrayList<VirusSample> simualtedSamples = new ArrayList<>();
 	private int enteredSamples = 0;
 	
 
-	public Engine(SimulatorController mainController){
+	public Engine(SimulatorController simulatorController){
 		System.out.println("Engine ctor");
 		Trace.setTraceLevel(Trace.Level.ERR);
-		this.mainController = mainController;
+		this.simulatorController = simulatorController;
+		this.mainController = simulatorController.getMainController();
+		this.advancedSettingsController = simulatorController.getAdvancedSettingsController();
 
-		servicepoints[0] = new Servicepoint(0, "Virus sample submission", new Uniform(1, 5), this, EventType.DEP1, false);
-		servicepoints[1] = new Servicepoint(1, "Backend scan", new Uniform(4, 8), this, EventType.DEP2, false);
+		servicepoints[0] = new Servicepoint(0, "Virus sample submission",
+				new Uniform(this.advancedSettingsController.getVirusSampleSubmissionMin(), this.advancedSettingsController.getVirusSampleSubmissionMax()), this, EventType.DEP1, false);
+		servicepoints[1] = new Servicepoint(1, "Backend scan",
+				new Uniform(this.advancedSettingsController.getBackendScanMin(), this.advancedSettingsController.getBackendScanMax()), this, EventType.DEP2, false);
 		//In backend scan we want to detect if the testsample comes up as a virus (lets assume that it always will be).
 		//In virus submission we dont scan anything. Thus both of them are marked as "non skippable"
 
-		servicepoints[2] = new Servicepoint(2, "Robot verification 1", new Uniform(6, 10), this, EventType.DEP3, true);
-		servicepoints[3] = new Servicepoint(3, "Robot verification 2", new Uniform(6, 10), this, EventType.DEP3, true);
+		servicepoints[2] = new Servicepoint(2, "Robot verification 1",
+				new Uniform(this.advancedSettingsController.getRobotVerify1Min(), this.advancedSettingsController.getRobotVerify1Max()), this, EventType.DEP3, true);
+		servicepoints[3] = new Servicepoint(3, "Robot verification 2",
+				new Uniform(this.advancedSettingsController.getRobotVerify2Min(), this.advancedSettingsController.getRobotVerify2Max()), this, EventType.DEP3, true);
 
-		servicepoints[4] = new Servicepoint(4, "Human verification", new Uniform(5, 13), this, EventType.DEP4, true);
+		servicepoints[4] = new Servicepoint(4, "Human verification",
+				new Uniform(this.advancedSettingsController.getHumanVerifyMin(), this.advancedSettingsController.getHumanVerifyMax()), this, EventType.DEP4, true);
 
 		clock = Clock.getInstance();
 		
@@ -56,7 +66,7 @@ public class Engine extends Thread {
 	}
 
 	public Tracker getTracker(){
-		return this.mainController.getTracker();
+		return this.simulatorController.getTracker();
 	}
 
 	public void setSimulointiaika(double aika) {

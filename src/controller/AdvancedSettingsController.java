@@ -1,5 +1,6 @@
 package controller;
 
+import eduni.distributions.ContinuousGenerator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 import view.MainApplication;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class AdvancedSettingsController {
 
@@ -52,15 +55,6 @@ public class AdvancedSettingsController {
     public void backSettings(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
-        // Technically this should never happen as we always start with main menu and save before it.
-        // It is still good to have this just in case.
-        if(this.mainController.getMainMenu() == null){
-            FXMLLoader mainMenu = new FXMLLoader(MainApplication.class.getResource("fxml/mainMenu.fxml"));
-            mainMenu.setController(this.mainController);
-            VBox vBox = mainMenu.load();
-            this.mainController.setMainMenu(new Scene(vBox));
-        }
-
         // Load saved main menu.
         primaryStage.setScene(this.mainController.getMainMenu());
     }
@@ -81,85 +75,97 @@ public class AdvancedSettingsController {
         this.submissionMax.setText(String.valueOf(this.submissionMaxDefualt));
     }
 
+    // Methods to verify that the field contains numbers, if not then use default value.
+
+    public void verify(){
+
+    }
+
+    public ContinuousGenerator getVirusSampleSubmission(){
+        if(this.getVirusSampleSubmissionMin() > this.getVirusSampleSubmissionMax()){
+            this.virusSampleSubmissionMin
+        }
+    }
+
     public int getVirusSampleSubmissionMin() {
-        if(virusSampleSubmissionMin.getText().matches("\\d*")){
+        if(virusSampleSubmissionMin.getText().matches("\\d*") && !virusSampleSubmissionMin.getText().isEmpty()){
             return Integer.parseInt(virusSampleSubmissionMin.getText());
         }
         return this.virusSampleSubmissionMinDefault;
     }
 
     public int getVirusSampleSubmissionMax() {
-        if(virusSampleSubmissionMax.getText().matches("\\d*")){
+        if(virusSampleSubmissionMax.getText().matches("\\d*") && !virusSampleSubmissionMax.getText().isEmpty()){
             return Integer.parseInt(virusSampleSubmissionMax.getText());
         }
         return this.virusSampleSubmissionMaxDefault;
     }
 
     public int getBackendScanMin() {
-        if(backendScanMin.getText().matches("\\d*")){
+        if(backendScanMin.getText().matches("\\d*") && !backendScanMin.getText().isEmpty()){
             return Integer.parseInt(backendScanMin.getText());
         }
         return this.backendScanMinDefault;
     }
 
     public int getBackendScanMax() {
-        if(backendScanMax.getText().matches("\\d*")){
+        if(backendScanMax.getText().matches("\\d*") && !backendScanMax.getText().isEmpty() ){
             return Integer.parseInt(backendScanMax.getText());
         }
         return this.backendScanMaxDefault;
     }
 
     public int getRobotVerify1Min() {
-        if(robotVerify1Min.getText().matches("\\d*")){
+        if(robotVerify1Min.getText().matches("\\d*") && !robotVerify1Min.getText().isEmpty()){
             return Integer.parseInt(robotVerify1Min.getText());
         }
         return this.robotVerify1MinDefault;
     }
 
     public int getRobotVerify1Max() {
-        if(robotVerify1Max.getText().matches("\\d*")){
+        if(robotVerify1Max.getText().matches("\\d*") && !robotVerify1Max.getText().isEmpty()){
             return Integer.parseInt(robotVerify1Max.getText());
         }
         return this.robotVerify1MaxDefault;
     }
 
     public int getRobotVerify2Min() {
-        if(robotVerify2Min.getText().matches("\\d*")){
+        if(robotVerify2Min.getText().matches("\\d*") && !robotVerify2Min.getText().isEmpty()){
             return Integer.parseInt(robotVerify2Min.getText());
         }
         return this.robotVerify2MinDefault;
     }
 
     public int getRobotVerify2Max() {
-        if(robotVerify2Max.getText().matches("\\d*")){
+        if(robotVerify2Max.getText().matches("\\d*") && !robotVerify2Max.getText().isEmpty()){
             return Integer.parseInt(robotVerify2Max.getText());
         }
         return this.robotVerify2MaxDefault;
     }
 
     public int getHumanVerifyMin() {
-        if(humanVerifyMin.getText().matches("\\d*")){
+        if(humanVerifyMin.getText().matches("\\d*") && !humanVerifyMin.getText().isEmpty()){
             return Integer.parseInt(humanVerifyMin.getText());
         }
         return this.humanVerifyMinDefault;
     }
 
     public int getHumanVerifyMax() {
-        if(humanVerifyMax.getText().matches("\\d*")){
+        if(humanVerifyMax.getText().matches("\\d*") && !humanVerifyMax.getText().isEmpty()){
             return Integer.parseInt(humanVerifyMax.getText());
         }
         return this.humanVerifyMaxDefault;
     }
 
     public int getSubmissionMin() {
-        if(virusSampleSubmissionMin.getText().matches("\\d*")){
+        if(virusSampleSubmissionMin.getText().matches("\\d*") && !virusSampleSubmissionMin.getText().isEmpty()){
             return Integer.parseInt(virusSampleSubmissionMin.getText());
         }
         return this.virusSampleSubmissionMinDefault;
     }
 
     public int getSubmissionMax() {
-        if(virusSampleSubmissionMax.getText().matches("\\d*")){
+        if(virusSampleSubmissionMax.getText().matches("\\d*") && !virusSampleSubmissionMax.getText().isEmpty()){
             return Integer.parseInt(virusSampleSubmissionMax.getText());
         }
         return this.virusSampleSubmissionMaxDefault;

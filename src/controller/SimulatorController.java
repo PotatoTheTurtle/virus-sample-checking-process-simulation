@@ -57,6 +57,14 @@ public class SimulatorController {
         this.engine.speedupTime(this.speedChange);
     }
 
+    public AdvancedSettingsController getAdvancedSettingsController(){
+        return this.advancedSettingsController;
+    }
+
+    public MainController getMainController(){
+        return this.mainController;
+    }
+
     public Tracker getTracker() {
         return this.tracker;
     }

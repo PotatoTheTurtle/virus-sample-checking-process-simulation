@@ -19,6 +19,8 @@ import view.MainApplication;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class MainController {
 
@@ -37,26 +39,21 @@ public class MainController {
 
     public MainController(MainApplication mainApplication){
         this.mainApplication = mainApplication;
+        this.advancedSettingsController = new AdvancedSettingsController(this);
     }
 
-    /*public void initialize(URL location, ResourceBundle resources) {
-        simulationTime.textProperty().addListener((obs, oldText, newText) -> {
-            simulationTime.setText(newText);
-        });
-    }*/
+    @FXML
+    public void initialize() throws IOException {
+        FXMLLoader settingsLoad = new FXMLLoader(MainApplication.class.getResource("fxml/advancedSettings.fxml"));
+        settingsLoad.setController(this.advancedSettingsController);
+        VBox vBox = settingsLoad.load();
+        this.settings = new Scene(vBox);
+    }
 
     @FXML
-    public void advancedSettings(ActionEvent actionEvent) throws IOException {
+    public void advancedSettings(ActionEvent actionEvent){
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         this.mainMenu = primaryStage.getScene();
-
-        if(this.settings == null){
-            FXMLLoader settingsLoad = new FXMLLoader(MainApplication.class.getResource("fxml/advancedSettings.fxml"));
-            this.advancedSettingsController = new AdvancedSettingsController(this);
-            settingsLoad.setController(this.advancedSettingsController);
-            VBox vBox = settingsLoad.load();
-            this.settings = new Scene(vBox);
-        }
         primaryStage.setScene(this.settings);
     }
 
