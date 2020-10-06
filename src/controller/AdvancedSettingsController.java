@@ -1,6 +1,8 @@
 package controller;
 
 import eduni.distributions.ContinuousGenerator;
+import eduni.distributions.Negexp;
+import eduni.distributions.Uniform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -77,97 +79,59 @@ public class AdvancedSettingsController {
 
     // Methods to verify that the field contains numbers, if not then use default value.
 
-    public void verify(){
-
+    public ContinuousGenerator getVirusSampleSubmissionGenerator(){
+        if(!virusSampleSubmissionMin.getText().isEmpty() && !virusSampleSubmissionMax.getText().isEmpty()){
+            if(virusSampleSubmissionMin.getText().matches("\\d*") && virusSampleSubmissionMax.getText().matches("\\d*")){
+                return new Uniform(Integer.parseInt(virusSampleSubmissionMin.getText()), Integer.parseInt(virusSampleSubmissionMax.getText()));
+            }
+        }
+        return new Uniform(this.virusSampleSubmissionMinDefault, this.virusSampleSubmissionMaxDefault);
     }
 
-    public ContinuousGenerator getVirusSampleSubmission(){
-        if(this.getVirusSampleSubmissionMin() > this.getVirusSampleSubmissionMax()){
-            this.virusSampleSubmissionMin
+    public ContinuousGenerator getBackendScanGenerator(){
+        if(!backendScanMin.getText().isEmpty() && !backendScanMax.getText().isEmpty()){
+            if(backendScanMin.getText().matches("\\d*") && backendScanMax.getText().matches("\\d*")){
+                return new Uniform(Integer.parseInt(backendScanMin.getText()), Integer.parseInt(backendScanMax.getText()));
+            }
         }
+        return new Uniform(this.backendScanMinDefault, this.backendScanMaxDefault);
     }
 
-    public int getVirusSampleSubmissionMin() {
-        if(virusSampleSubmissionMin.getText().matches("\\d*") && !virusSampleSubmissionMin.getText().isEmpty()){
-            return Integer.parseInt(virusSampleSubmissionMin.getText());
+    public ContinuousGenerator getRobotVerify1Generator(){
+        if(!robotVerify1Min.getText().isEmpty() && !robotVerify1Max.getText().isEmpty()){
+            if(robotVerify1Min.getText().matches("\\d*") && robotVerify1Max.getText().matches("\\d*")){
+                return new Uniform(Integer.parseInt(robotVerify1Min.getText()), Integer.parseInt(robotVerify1Max.getText()));
+            }
         }
-        return this.virusSampleSubmissionMinDefault;
+        return new Uniform(this.robotVerify1MinDefault, this.robotVerify1MaxDefault);
     }
 
-    public int getVirusSampleSubmissionMax() {
-        if(virusSampleSubmissionMax.getText().matches("\\d*") && !virusSampleSubmissionMax.getText().isEmpty()){
-            return Integer.parseInt(virusSampleSubmissionMax.getText());
+    public ContinuousGenerator getRobotVerify2Generator(){
+        if(!robotVerify2Min.getText().isEmpty() && !robotVerify2Max.getText().isEmpty()){
+            if(robotVerify2Min.getText().matches("\\d*") && robotVerify2Max.getText().matches("\\d*")){
+                return new Uniform(Integer.parseInt(robotVerify2Min.getText()), Integer.parseInt(robotVerify2Max.getText()));
+            }
         }
-        return this.virusSampleSubmissionMaxDefault;
+        return new Uniform(this.robotVerify2MinDefault, this.robotVerify2MaxDefault);
     }
 
-    public int getBackendScanMin() {
-        if(backendScanMin.getText().matches("\\d*") && !backendScanMin.getText().isEmpty()){
-            return Integer.parseInt(backendScanMin.getText());
+    public ContinuousGenerator getHumanVerificationGenerator(){
+        if(!humanVerifyMin.getText().isEmpty() && !humanVerifyMax.getText().isEmpty()){
+            if(humanVerifyMin.getText().matches("\\d*") && humanVerifyMax.getText().matches("\\d*")){
+                return new Uniform(Integer.parseInt(humanVerifyMin.getText()), Integer.parseInt(humanVerifyMax.getText()));
+            }
         }
-        return this.backendScanMinDefault;
+        return new Uniform(this.humanVerifyMinDefault, this.humanVerifyMaxDefault);
     }
 
-    public int getBackendScanMax() {
-        if(backendScanMax.getText().matches("\\d*") && !backendScanMax.getText().isEmpty() ){
-            return Integer.parseInt(backendScanMax.getText());
-        }
-        return this.backendScanMaxDefault;
-    }
 
-    public int getRobotVerify1Min() {
-        if(robotVerify1Min.getText().matches("\\d*") && !robotVerify1Min.getText().isEmpty()){
-            return Integer.parseInt(robotVerify1Min.getText());
+    //TODO: this is seed, redo this please
+    public ContinuousGenerator getSubmissionGenerator(){
+        if(!submissionMin.getText().isEmpty() && !submissionMax.getText().isEmpty()){
+            if(submissionMin.getText().matches("\\d*") && submissionMax.getText().matches("\\d*")){
+                return new Negexp(Integer.parseInt(submissionMin.getText()), Integer.parseInt(submissionMax.getText()));
+            }
         }
-        return this.robotVerify1MinDefault;
-    }
-
-    public int getRobotVerify1Max() {
-        if(robotVerify1Max.getText().matches("\\d*") && !robotVerify1Max.getText().isEmpty()){
-            return Integer.parseInt(robotVerify1Max.getText());
-        }
-        return this.robotVerify1MaxDefault;
-    }
-
-    public int getRobotVerify2Min() {
-        if(robotVerify2Min.getText().matches("\\d*") && !robotVerify2Min.getText().isEmpty()){
-            return Integer.parseInt(robotVerify2Min.getText());
-        }
-        return this.robotVerify2MinDefault;
-    }
-
-    public int getRobotVerify2Max() {
-        if(robotVerify2Max.getText().matches("\\d*") && !robotVerify2Max.getText().isEmpty()){
-            return Integer.parseInt(robotVerify2Max.getText());
-        }
-        return this.robotVerify2MaxDefault;
-    }
-
-    public int getHumanVerifyMin() {
-        if(humanVerifyMin.getText().matches("\\d*") && !humanVerifyMin.getText().isEmpty()){
-            return Integer.parseInt(humanVerifyMin.getText());
-        }
-        return this.humanVerifyMinDefault;
-    }
-
-    public int getHumanVerifyMax() {
-        if(humanVerifyMax.getText().matches("\\d*") && !humanVerifyMax.getText().isEmpty()){
-            return Integer.parseInt(humanVerifyMax.getText());
-        }
-        return this.humanVerifyMaxDefault;
-    }
-
-    public int getSubmissionMin() {
-        if(virusSampleSubmissionMin.getText().matches("\\d*") && !virusSampleSubmissionMin.getText().isEmpty()){
-            return Integer.parseInt(virusSampleSubmissionMin.getText());
-        }
-        return this.virusSampleSubmissionMinDefault;
-    }
-
-    public int getSubmissionMax() {
-        if(virusSampleSubmissionMax.getText().matches("\\d*") && !virusSampleSubmissionMax.getText().isEmpty()){
-            return Integer.parseInt(virusSampleSubmissionMax.getText());
-        }
-        return this.virusSampleSubmissionMaxDefault;
+        return new Negexp(this.submissionMinDefault, this.submissionMaxDefualt);
     }
 }

@@ -115,62 +115,62 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="virusSampleSubmissionMin" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <TextField fx:id="virusSampleSubmissionMin" text="1" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="virusSampleSubmissionMax" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <TextField fx:id="virusSampleSubmissionMax" text="5" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="backendScanMin" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <TextField fx:id="backendScanMin" text="4" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="backendScanMax" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                  <TextField fx:id="backendScanMax" text="8" GridPane.columnIndex="2" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="robotVerify1Min" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextField fx:id="robotVerify1Min" text="6" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="robotVerify1Max" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                  <TextField fx:id="robotVerify1Max" text="10" GridPane.columnIndex="2" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="robotVerify2Min" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <TextField fx:id="robotVerify2Min" text="6" GridPane.columnIndex="1" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="robotVerify2Max" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <TextField fx:id="robotVerify2Max" text="10" GridPane.columnIndex="2" GridPane.rowIndex="4">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="humanVerifyMin" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                  <TextField fx:id="humanVerifyMin" text="5" GridPane.columnIndex="1" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="humanVerifyMax" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                  <TextField fx:id="humanVerifyMax" text="13" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="submissionMin" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                  <TextField fx:id="submissionMin" text="15" GridPane.columnIndex="1" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>
                   </TextField>
-                  <TextField fx:id="submissionMax" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                  <TextField fx:id="submissionMax" text="5" GridPane.columnIndex="2" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="5.0" right="5.0" />
                      </GridPane.margin>

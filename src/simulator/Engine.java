@@ -42,24 +42,19 @@ public class Engine extends Thread {
 		this.mainController = simulatorController.getMainController();
 		this.advancedSettingsController = simulatorController.getAdvancedSettingsController();
 
-		servicepoints[0] = new Servicepoint(0, "Virus sample submission",
-				new Uniform(this.advancedSettingsController.getVirusSampleSubmissionMin(), this.advancedSettingsController.getVirusSampleSubmissionMax()), this, EventType.DEP1, false);
-		servicepoints[1] = new Servicepoint(1, "Backend scan",
-				new Uniform(this.advancedSettingsController.getBackendScanMin(), this.advancedSettingsController.getBackendScanMax()), this, EventType.DEP2, false);
+		servicepoints[0] = new Servicepoint(0, "Virus sample submission", this.advancedSettingsController.getVirusSampleSubmissionGenerator(), this, EventType.DEP1, false);
+		servicepoints[1] = new Servicepoint(1, "Backend scan", this.advancedSettingsController.getBackendScanGenerator(), this, EventType.DEP2, false);
 		//In backend scan we want to detect if the testsample comes up as a virus (lets assume that it always will be).
 		//In virus submission we dont scan anything. Thus both of them are marked as "non skippable"
 
-		servicepoints[2] = new Servicepoint(2, "Robot verification 1",
-				new Uniform(this.advancedSettingsController.getRobotVerify1Min(), this.advancedSettingsController.getRobotVerify1Max()), this, EventType.DEP3, true);
-		servicepoints[3] = new Servicepoint(3, "Robot verification 2",
-				new Uniform(this.advancedSettingsController.getRobotVerify2Min(), this.advancedSettingsController.getRobotVerify2Max()), this, EventType.DEP3, true);
+		servicepoints[2] = new Servicepoint(2, "Robot verification 1", this.advancedSettingsController.getRobotVerify1Generator(), this, EventType.DEP3, true);
+		servicepoints[3] = new Servicepoint(3, "Robot verification 2", this.advancedSettingsController.getRobotVerify2Generator(), this, EventType.DEP3, true);
 
-		servicepoints[4] = new Servicepoint(4, "Human verification",
-				new Uniform(this.advancedSettingsController.getHumanVerifyMin(), this.advancedSettingsController.getHumanVerifyMax()), this, EventType.DEP4, true);
+		servicepoints[4] = new Servicepoint(4, "Human verification", this.advancedSettingsController.getHumanVerificationGenerator(), this, EventType.DEP4, true);
 
 		clock = Clock.getInstance();
 		
-		arrivalProcess = new ArrivalProcess(this, new Negexp(15,5), EventType.ARR1);
+		arrivalProcess = new ArrivalProcess(this, this.advancedSettingsController.getSubmissionGenerator(), EventType.ARR1);
 		eventList = new EventList();
 		arrivalProcess.generoiSeuraava(); // Ensimmäinen saapuminen!!
 		
