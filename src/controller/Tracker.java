@@ -13,8 +13,8 @@ public class Tracker {
 
     private SimulatorController simulatorController;
 
-    public Tracker(SimulatorController advancedSettingsController){
-        this.simulatorController = advancedSettingsController;
+    public Tracker(SimulatorController simulatorController){
+        this.simulatorController = simulatorController;
     }
 
     public void setCircleStatus(int id, boolean visible){
@@ -57,6 +57,7 @@ public class Tracker {
         }
     }
 
+    //TODO: Animations
     public void moveSample(int id){
         PathTransition transition = new PathTransition();
         switch (id){

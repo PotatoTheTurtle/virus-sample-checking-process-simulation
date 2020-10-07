@@ -4,23 +4,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polyline;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import simulator.Engine;
 import view.MainApplication;
 
 import javafx.event.ActionEvent;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class MainController {
 

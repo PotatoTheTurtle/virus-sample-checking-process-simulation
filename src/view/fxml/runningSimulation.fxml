@@ -123,6 +123,11 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <Button fx:id="nextButton" layoutX="496.0" layoutY="50.0" mnemonicParsing="false" onAction="#nextPage" text="Next" visible="false">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
          <opaqueInsets>
             <Insets />

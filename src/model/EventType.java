@@ -1,4 +1,4 @@
-package simulator;
+package model;
 
 public enum EventType {
 	ARR1,

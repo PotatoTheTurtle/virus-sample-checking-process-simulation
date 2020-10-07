@@ -1,4 +1,4 @@
-package simulator;
+package model;
 import eduni.distributions.*;
 
 public class ArrivalProcess {

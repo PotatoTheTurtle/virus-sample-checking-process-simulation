@@ -1,17 +1,30 @@
 package controller;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polyline;
-import simulator.Engine;
+import javafx.stage.Stage;
+import model.Engine;
+import model.ServicePointStatistic;
+import model.StatsDAO;
+import view.MainApplication;
+
+import java.io.IOException;
+import java.util.Arrays;
 
 public class SimulatorController {
 
     private AdvancedSettingsController advancedSettingsController;
     private MainController mainController;
 
+    private StatsDAO statsDAO;
     private Engine engine;
     private Tracker tracker;
 
@@ -20,7 +33,8 @@ public class SimulatorController {
 
     @FXML
     private Label timeLabel;
-
+    @FXML
+    private Button nextButton;
     @FXML
     private Circle circle0, circle1, circle2, circle3, circle4;
     @FXML
@@ -35,10 +49,23 @@ public class SimulatorController {
         this.advancedSettingsController = advancedSettingsController;
         this.mainController = mainController;
         this.engine = new Engine(this);
+        this.statsDAO = new StatsDAO();
+
+    }
+
+    public void saveStatistics(int simulationTime, ServicePointStatistic[] servicePointStatistics){
+        int run_id = this.statsDAO.setupRunTable(simulationTime);
+        if(run_id != 0){
+            for(ServicePointStatistic servicePointStatistic : servicePointStatistics){
+                this.statsDAO.saveServicePoint(servicePointStatistic, run_id);
+            }
+        }
+        System.out.println(this.statsDAO.getAllServicepoints());
+        System.out.println(this.statsDAO.getAllServicepoints().size());
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() throws InterruptedException {
         this.tracker = new Tracker(this);
         this.timeLabel.setText((double) this.speed / 1000 + "/second per cycle");
         this.engine.start();
@@ -52,10 +79,23 @@ public class SimulatorController {
         this.engine.slowdownTime(this.speedChange);
     }
 
-    @FXML void speedupTime(){
+    @FXML
+    void speedupTime(){
         this.speed -= this.speedChange;
         this.timeLabel.setText((double) this.speed / 1000 + "/second(s) per cycle");
         this.engine.speedupTime(this.speedChange);
+    }
+
+    public void showNextButton(){
+        this.nextButton.setVisible(true);
+    }
+
+    @FXML
+    public void nextPage(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader simulationRun = new FXMLLoader(MainApplication.class.getResource("fxml/simulationStats.fxml"));
+        simulationRun.setController(new SimulatorStatisticsController(this.engine));
+        primaryStage.setScene(new Scene(simulationRun.load()));
     }
 
     public AdvancedSettingsController getAdvancedSettingsController(){

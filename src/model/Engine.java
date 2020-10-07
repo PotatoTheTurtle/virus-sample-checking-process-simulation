@@ -1,12 +1,12 @@
-package simulator;
+package model;
 
 import controller.AdvancedSettingsController;
 import controller.MainController;
 import controller.SimulatorController;
 import controller.Tracker;
-import eduni.distributions.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Engine extends Thread {
@@ -95,6 +95,7 @@ public class Engine extends Thread {
 
 		}
 		tulokset();
+		this.simulatorController.showNextButton();
 	}
 	
 	void suoritaBTapahtumat(){
@@ -183,7 +184,13 @@ public class Engine extends Thread {
 	}
 	
 	private void tulokset(){
-		for(Servicepoint servicepoint : this.servicepoints){
+		ServicePointStatistic[] servicePointStatistics = new ServicePointStatistic[this.servicepoints.length];
+		for(int i = 0; i < this.servicepoints.length; i++){
+			Servicepoint servicepoint = this.servicepoints[i];
+			servicePointStatistics[i] = new ServicePointStatistic(servicepoint.getName(), servicepoint.getBusyTime(), servicepoint.getCompletedServices(),
+					servicepoint.getBusyTime() / this.simulointiaika, servicepoint.getBusyTime() / servicepoint.getCompletedServices());
+		}
+		/*for(Servicepoint servicepoint : this.servicepoints){
 			try {
 				System.out.format("Statistics for %s: \n", servicepoint.getName());
 				System.out.format("Busy time: %f \n", servicepoint.getBusyTime());
@@ -193,7 +200,9 @@ public class Engine extends Thread {
 			}catch (ArithmeticException e){
 				System.out.println("Cannot devide by 0.");
 			}
-		}
+		}*/
+
+		this.simulatorController.saveStatistics((int) this.simulointiaika, servicePointStatistics);
 
 		System.out.println("Whole simulation: ");
 		System.out.format("Throughput: %f\n", this.simualtedSamples.size() / this.simulointiaika);
