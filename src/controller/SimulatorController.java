@@ -42,6 +42,7 @@ public class SimulatorController {
         this.tracker = new Tracker(this);
         this.timeLabel.setText((double) this.speed / 1000 + "/second per cycle");
         this.engine.start();
+
     }
 
     @FXML
