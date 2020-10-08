@@ -95,7 +95,7 @@ public class Engine extends Thread {
 			clock.setTime(nykyaika());
 			suoritaBTapahtumat();
 			yritaCTapahtumat();
-
+			this.simulatorController.updateSimulationTime(clock.getTime());
 		}
 		tulokset();
 		clock.setTime(0); //Reset to 0 incase of second run.

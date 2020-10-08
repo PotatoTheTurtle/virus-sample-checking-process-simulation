@@ -80,27 +80,27 @@
             <Circle fx:id="circle4_out" fill="DODGERBLUE" layoutX="563.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Circle fx:id="circle1_3" fill="DODGERBLUE" layoutX="230.0" layoutY="139.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Polyline fx:id="polyline0_1" fill="CHARTREUSE" layoutX="138.0" layoutY="60.0" points="63.5, 78.5, 38.0, 77.5, 4.0, 77.5, -31.20709228515625, 77.5" strokeType="INSIDE" />
-            <Label fx:id="label0" layoutX="19.0" layoutY="70.0" text="Sample submission" textAlignment="CENTER">
+            <Label fx:id="label0" layoutX="20.0" layoutY="55.0" prefHeight="50.0" prefWidth="136.0" text="Sample submission samples:0" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="label2" layoutX="332.0" layoutY="14.0" text="Sample submission" textAlignment="CENTER">
+            <Label fx:id="label2" layoutX="327.0" prefHeight="50.0" prefWidth="130.0" text="Robot verification #1 samples: 0" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="label3" layoutX="332.0" layoutY="225.0" text="Sample submission" textAlignment="CENTER">
+            <Label fx:id="label3" layoutX="326.0" layoutY="226.0" prefHeight="50.0" prefWidth="130.0" text="Robot verification #2 samples: 0" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="label1" layoutX="171.0" layoutY="69.0" text="Sample submission" textAlignment="CENTER">
+            <Label fx:id="label1" layoutX="171.0" layoutY="55.0" prefHeight="50.0" prefWidth="119.0" text="Backend scan samples: 0" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label fx:id="label4" layoutX="504.0" layoutY="69.0" text="Sample submission" textAlignment="CENTER">
+            <Label fx:id="label4" layoutX="506.0" layoutY="55.0" prefHeight="50.0" prefWidth="117.0" text="Human verification samples: 0" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -117,8 +117,8 @@
          <children>
             <ButtonBar buttonOrder="U+L_HE+FBIX_NCYOA_R" layoutX="220.0" layoutY="50.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="220.0" AnchorPane.topAnchor="50.0">
               <buttons>
-                <Button mnemonicParsing="false" onAction="#speedupTime" text="Speed up" />
-                  <Button mnemonicParsing="false" onAction="#slowdownTime" text="Slow down" />
+                <Button fx:id="speedupTimeButton" mnemonicParsing="false" onAction="#speedupTime" text="Speed up" />
+                  <Button fx:id="slowdownTimeButton" mnemonicParsing="false" onAction="#slowdownTime" text="Slow down" />
               </buttons>
             </ButtonBar>
             <Label fx:id="timeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="177.0" layoutY="23.0" prefHeight="27.0" prefWidth="287.0" text="0.3/second(s) per cycle" textAlignment="CENTER" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="23.0">
@@ -126,11 +126,16 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="nextButton" layoutX="496.0" layoutY="50.0" mnemonicParsing="false" onAction="#nextPage" text="Next" visible="false">
+            <Button fx:id="nextButton" layoutX="290.0" layoutY="50.0" mnemonicParsing="false" onAction="#nextPage" text="Next" visible="false">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
+            <Label fx:id="simulationTimeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="177.0" layoutY="1.0" prefHeight="27.0" prefWidth="287.0" text="Time passed: 0" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
          <opaqueInsets>
             <Insets />

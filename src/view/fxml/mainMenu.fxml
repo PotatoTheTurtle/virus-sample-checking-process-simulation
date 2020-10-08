@@ -19,7 +19,7 @@
   <children>
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <menus>
-        <Menu mnemonicParsing="false" text="More">
+        <Menu mnemonicParsing="false" text="FAQ and Past Results">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#pastResultsButton" text="Past results" />
                   <MenuItem mnemonicParsing="false" onAction="#faqButton" text="FAQ" />

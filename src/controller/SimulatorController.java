@@ -32,7 +32,7 @@ public class SimulatorController {
     private int speedChange = 100;
 
     @FXML
-    private Label timeLabel;
+    private Label timeLabel, simulationTimeLabel;
     @FXML
     private Button nextButton;
     @FXML
@@ -45,6 +45,8 @@ public class SimulatorController {
     private Polyline polyline0_1;
     @FXML
     private Label label0, label1, label2, label3, label4;
+    @FXML
+    private Button speedupTimeButton, slowdownTimeButton;
 
     // Get settings for the simulator from the controllers
     public SimulatorController(AdvancedSettingsController advancedSettingsController, MainController mainController){
@@ -89,7 +91,14 @@ public class SimulatorController {
     }
 
     public void showNextButton(){
+        this.speedupTimeButton.setVisible(false);
+        this.slowdownTimeButton.setVisible(false);
+        this.timeLabel.setVisible(false);
         this.nextButton.setVisible(true);
+    }
+
+    public void updateSimulationTime(double time){
+        Platform.runLater(() -> this.simulationTimeLabel.setText(String.format("Time passed: %.2f", time)));
     }
 
     @FXML
