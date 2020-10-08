@@ -105,6 +105,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Circle fx:id="skipCircle2" fill="#ff1f1f" layoutX="391.0" layoutY="197.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="skipCircle1" fill="#ff1f1f" layoutX="391.0" layoutY="80.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="skipCircle3" fill="#ff1f1f" layoutX="564.0" layoutY="138.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
          </children>
          <opaqueInsets>
             <Insets />

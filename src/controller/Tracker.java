@@ -37,6 +37,20 @@ public class Tracker {
         }
     }
 
+    public void setSkipCircle(int id, boolean visible){
+        switch (id){
+            case 2:
+                this.simulatorController.getSkipCircle1().setVisible(visible);
+                break;
+            case 3:
+                this.simulatorController.getSkipCircle2().setVisible(visible);
+                break;
+            case 4:
+                this.simulatorController.getSkipCircle3().setVisible(visible);
+                break;
+        }
+    }
+
     public void setServicepointLabel(int id, int queueAmount){
         switch (id){
             case 0:
@@ -57,7 +71,6 @@ public class Tracker {
         }
     }
 
-    //TODO: Animations
     public void moveSample(int id){
         PathTransition transition = new PathTransition();
         switch (id){

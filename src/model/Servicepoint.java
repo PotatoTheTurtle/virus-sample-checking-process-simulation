@@ -67,13 +67,15 @@ public class Servicepoint {
 
 		//If scan detected test sample as real virus then skip all other verification methods
 		Random random = new Random();
-		if((jono.peek().getVirusProbability() > random.nextInt(100) + 1) && this.skippable){
+		if((jono.peek().getVirusProbability() >= random.nextInt(100) + 1) && this.skippable){
 			System.out.println("Skipped " + this.name);
 			jono.poll();
 			varattu = false;
 			this.completedServices += 1;
+			this.engine.getTracker().setSkipCircle(this.serviceID, true);
 			engine.uusiTapahtuma(new Event(EventType.SKIP, Clock.getInstance().getTime() + (palveluaika * size)));
 		}else{
+			this.engine.getTracker().setSkipCircle(this.serviceID, false);
 			engine.uusiTapahtuma(new Event(this.scheduledEventType, Clock.getInstance().getTime() + (palveluaika * size)));
 		}
 	}

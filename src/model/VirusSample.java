@@ -3,7 +3,6 @@ package model;
 import controller.Tracker;
 
 public class VirusSample {
-	private Tracker tracker;
 
 	private double arrivalTime;
 	private double departureTime;
@@ -11,7 +10,6 @@ public class VirusSample {
 	private int id;
 	private double size;
 	private int virusProbability;
-	private int servicedAt;
 
 	private static int i = 1;
 	private static long sum = 0;
@@ -19,7 +17,6 @@ public class VirusSample {
 	public VirusSample(double size, int virusProbability){
 		this.size = size;
 		this.virusProbability = virusProbability;
-		this.tracker = tracker;
 	    id = i++;
 	    
 		arrivalTime = Clock.getInstance().getTime();
@@ -49,16 +46,6 @@ public class VirusSample {
 	public double getSize(){
 		return this.size;
 	}
-
-	/*public int getServicedAt() {
-		return this.servicedAt;
-	}
-
-	public void setServicedAt(int servicedAt) {
-		System.out.println("serviced at " + this.servicedAt);
-		this.tracker.setCircleStatus(servicedAt);
-		this.servicedAt = servicedAt;
-	}*/
 
 	public void raportti(){
 		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " saapui:" + arrivalTime);

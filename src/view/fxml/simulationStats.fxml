@@ -78,8 +78,8 @@
                         </Label>
                         <GridPane>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0" prefWidth="185.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="266.0" minWidth="10.0" prefWidth="266.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -90,8 +90,73 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <VBox.margin>
-                              <Insets bottom="40.0" top="20.0" />
+                              <Insets bottom="40.0" left="30.0" right="20.0" top="20.0" />
                            </VBox.margin>
+                           <children>
+                              <Label alignment="CENTER" text="Name:" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="nameLabel" alignment="CENTER" text="None" textAlignment="CENTER" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" text="Busy time:" textAlignment="CENTER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" text="Service times:" textAlignment="CENTER" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" text="Utilization:" textAlignment="CENTER" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" text="Avg Service times:" textAlignment="CENTER" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" text="Simulation length:" textAlignment="CENTER" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="busyTimeLabel" alignment="CENTER" text="None" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="serviceTimesLabel" alignment="CENTER" text="None" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="utilizationLabel" alignment="CENTER" text="None" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="avgServiceTimesLabel" alignment="CENTER" text="None" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="simulationLengthLabel" alignment="CENTER" text="None" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
                         </GridPane>
                         <GridPane>
                           <columnConstraints>
@@ -100,19 +165,26 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <ButtonBar buttonOrder="U+L_HE+FBIX_NCYOA_R" prefHeight="40.0" prefWidth="200.0">
                                 <buttons>
-                                  <Button fx:id="sampleSubmission" mnemonicParsing="false" text="Sample submission" />
-                                    <Button fx:id="backendScan" mnemonicParsing="false" text="Backend scan" />
+                                  <Button mnemonicParsing="false" onAction="#sampleSubmission" text="Sample submission" />
+                                    <Button mnemonicParsing="false" onAction="#backendScan" text="Backend scan" />
+                                    <Button mnemonicParsing="false" text="Configuration used" />
                                 </buttons>
                               </ButtonBar>
                               <ButtonBar buttonOrder="U+L_HE+FBIX_NCYOA_R" prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="1">
                                 <buttons>
-                                  <Button fx:id="robotVerification1" mnemonicParsing="false" text="Robot verification #1" />
-                                    <Button fx:id="robotVerification2" mnemonicParsing="false" text="Robot verification #2" />
-                                    <Button fx:id="humanVerification" mnemonicParsing="false" text="Human verification" />
+                                  <Button mnemonicParsing="false" onAction="#robotVerification1" text="Robot verification #1" />
+                                    <Button mnemonicParsing="false" onAction="#robotVerification2" text="Robot verification #2" />
+                                    <Button mnemonicParsing="false" onAction="#humanVerification" text="Human verification" />
+                                </buttons>
+                              </ButtonBar>
+                              <ButtonBar buttonOrder="U+L_HE+FBIX_NCYOA_R" prefHeight="40.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                <buttons>
+                                  <Button mnemonicParsing="false" onAction="#mainMenuButton" text="Back to main menu" />
                                 </buttons>
                               </ButtonBar>
                            </children>

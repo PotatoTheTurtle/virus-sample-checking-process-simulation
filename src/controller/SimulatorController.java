@@ -40,6 +40,8 @@ public class SimulatorController {
     @FXML
     private Circle circle0_1, circle1_2, circle1_3, circle2_4, circle3_4, circle4_out;
     @FXML
+    private Circle skipCircle1, skipCircle2, skipCircle3;
+    @FXML
     private Polyline polyline0_1;
     @FXML
     private Label label0, label1, label2, label3, label4;
@@ -60,8 +62,6 @@ public class SimulatorController {
                 this.statsDAO.saveServicePoint(servicePointStatistic, run_id);
             }
         }
-        System.out.println(this.statsDAO.getAllServicepoints());
-        System.out.println(this.statsDAO.getAllServicepoints().size());
     }
 
     @FXML
@@ -69,7 +69,6 @@ public class SimulatorController {
         this.tracker = new Tracker(this);
         this.timeLabel.setText((double) this.speed / 1000 + "/second per cycle");
         this.engine.start();
-
     }
 
     @FXML
@@ -80,7 +79,10 @@ public class SimulatorController {
     }
 
     @FXML
-    void speedupTime(){
+    public void speedupTime(){
+        if(this.speed - speedChange < 0){
+            return;
+        }
         this.speed -= this.speedChange;
         this.timeLabel.setText((double) this.speed / 1000 + "/second(s) per cycle");
         this.engine.speedupTime(this.speedChange);
@@ -94,7 +96,7 @@ public class SimulatorController {
     public void nextPage(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         FXMLLoader simulationRun = new FXMLLoader(MainApplication.class.getResource("fxml/simulationStats.fxml"));
-        simulationRun.setController(new SimulatorStatisticsController(this.engine));
+        simulationRun.setController(new SimulatorStatisticsController(this.engine, this.mainController));
         primaryStage.setScene(new Scene(simulationRun.load()));
     }
 
@@ -152,6 +154,18 @@ public class SimulatorController {
 
     public Circle getCircle4_out() {
         return circle4_out;
+    }
+
+    public Circle getSkipCircle1() {
+        return skipCircle1;
+    }
+
+    public Circle getSkipCircle2() {
+        return skipCircle2;
+    }
+
+    public Circle getSkipCircle3() {
+        return skipCircle3;
     }
 
     public void setLabel0(String text) {

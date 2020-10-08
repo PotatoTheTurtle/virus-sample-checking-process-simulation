@@ -14,7 +14,7 @@ public class MainApplication extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         FXMLLoader mainMenuLoad = new FXMLLoader(MainApplication.class.getResource("fxml/mainMenu.fxml"));
-        mainMenuLoad.setController(new MainController(this));
+        mainMenuLoad.setController(new MainController());
         VBox vbox = mainMenuLoad.load();
         Scene mainMenu = new Scene(vbox);
 

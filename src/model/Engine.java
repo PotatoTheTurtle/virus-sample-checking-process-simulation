@@ -12,9 +12,9 @@ import java.util.Random;
 public class Engine extends Thread {
 
 	//Entries
-	private double simulointiaika = 300;
-	private int probability = 10;
-	private int size = 2;
+	private double simulointiaika;
+	private int probability;
+	private double size;
 	private long delay = 500L;
 	//TODO: Make size min and max, we want random sample sizes not static.
 	//TODO: Parametrize random generators
@@ -41,6 +41,9 @@ public class Engine extends Thread {
 		this.simulatorController = simulatorController;
 		this.mainController = simulatorController.getMainController();
 		this.advancedSettingsController = simulatorController.getAdvancedSettingsController();
+		this.simulointiaika = this.mainController.getSimulationTime();
+		this.probability = this.mainController.getVirusProbability();
+		this.size = this.mainController.getSampleSize();
 
 		servicepoints[0] = new Servicepoint(0, "Virus sample submission", this.advancedSettingsController.getVirusSampleSubmissionGenerator(), this, EventType.DEP1, false);
 		servicepoints[1] = new Servicepoint(1, "Backend scan", this.advancedSettingsController.getBackendScanGenerator(), this, EventType.DEP2, false);
@@ -95,6 +98,7 @@ public class Engine extends Thread {
 
 		}
 		tulokset();
+		clock.setTime(0); //Reset to 0 incase of second run.
 		this.simulatorController.showNextButton();
 	}
 	
@@ -121,7 +125,7 @@ public class Engine extends Thread {
 			case ARR1:
 				//Enter submission
 				Random random = new Random();
-				VirusSample sample = new VirusSample(size, random.nextInt(this.probability) + 1);
+				VirusSample sample = new VirusSample(this.size, random.nextInt(this.probability) + 1);
 				sample.setArrivalTime(this.clock.getTime());
 				servicepoints[0].lisaaJonoon(sample);
 				arrivalProcess.generoiSeuraava();
@@ -184,6 +188,7 @@ public class Engine extends Thread {
 	}
 	
 	private void tulokset(){
+		System.out.println(clock.getTime());
 		ServicePointStatistic[] servicePointStatistics = new ServicePointStatistic[this.servicepoints.length];
 		for(int i = 0; i < this.servicepoints.length; i++){
 			Servicepoint servicepoint = this.servicepoints[i];
