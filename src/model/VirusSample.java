@@ -46,14 +46,4 @@ public class VirusSample {
 	public double getSize(){
 		return this.size;
 	}
-
-	public void raportti(){
-		Trace.out(Trace.Level.INFO, "Asiakas "+id+ " saapui:" + arrivalTime);
-		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " poistui:" + departureTime);
-		Trace.out(Trace.Level.INFO,"Asiakas "+id+ " viipyi:" +(departureTime - arrivalTime));
-		sum += (departureTime - arrivalTime);
-		double keskiarvo = sum/id;
-		System.out.println("Asiakkaiden läpimenoaikojen keskiarvo "+ keskiarvo);
-	}
-
 }

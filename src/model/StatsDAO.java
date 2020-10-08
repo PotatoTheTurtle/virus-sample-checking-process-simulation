@@ -102,10 +102,7 @@ public class StatsDAO {
 
                 ServicePointStatistic[] servicePointStatistics = new ServicePointStatistic[5];
                 PreparedStatement statement = connection.prepareStatement("SELECT * FROM SERVICEPOINT where run_id = ?");
-
                 statement.setInt(1, item.run_id);
-
-
                 ResultSet resultSet = statement.executeQuery();
 
                 int i = 0;

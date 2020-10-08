@@ -18,17 +18,14 @@ public class Servicepoint {
 	private String name;
 	private double busyTime = 0;
 	private int completedServices = 0;
-	private int serviceID;
+	private int serviceID = 0;
 	private Tracker tracker;
-	
-	//JonoStartegia strategia; //optio: asiakkaiden järjestys
-	
+
 	private boolean varattu = false;
-	private boolean skippable;
+	private boolean skippable = false;
 
 
 	public Servicepoint(int serviceID ,String name, ContinuousGenerator generator, Engine engine, EventType tyyppi, boolean skippable){
-		System.out.println("Service point");
 		this.engine = engine;
 		this.generator = generator;
 		this.scheduledEventType = tyyppi;
@@ -36,7 +33,6 @@ public class Servicepoint {
 		this.skippable = skippable;
 		this.serviceID = serviceID;
 	}
-
 
 	public void lisaaJonoon(VirusSample a){
 		this.engine.getTracker().setCircleStatus(this.serviceID, true);
@@ -110,7 +106,6 @@ public class Servicepoint {
 	}
 
 	public void setServiceID(int serviceID) {
-		System.out.println("Service id set to: " + serviceID);
 		this.serviceID = serviceID;
 	}
 

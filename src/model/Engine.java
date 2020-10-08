@@ -52,7 +52,6 @@ public class Engine extends Thread {
 
 		servicepoints[2] = new Servicepoint(2, "Robot verification 1", this.advancedSettingsController.getRobotVerify1Generator(), this, EventType.DEP3, true);
 		servicepoints[3] = new Servicepoint(3, "Robot verification 2", this.advancedSettingsController.getRobotVerify2Generator(), this, EventType.DEP3, true);
-
 		servicepoints[4] = new Servicepoint(4, "Human verification", this.advancedSettingsController.getHumanVerificationGenerator(), this, EventType.DEP4, true);
 
 		clock = Clock.getInstance();
@@ -117,7 +116,7 @@ public class Engine extends Thread {
 	}
 
 	
-	void suoritaTapahtuma(Event event){  // Keskitetty algoritmi tapahtumien käsittelyyn ja asiakkaiden siirtymisten hallintaan
+	void suoritaTapahtuma(Event event){
 
 		VirusSample a;
 		switch (event.getTyyppi()){
@@ -164,7 +163,6 @@ public class Engine extends Thread {
 				//Stats
 				a = servicepoints[4].otaJonosta();
 				a.setDepartureTime(clock.getTime());
-				a.raportti();
 				this.simualtedSamples.add(a);
 				break;
 			case SKIP:
@@ -176,7 +174,6 @@ public class Engine extends Thread {
 	public void uusiTapahtuma(Event t){
 		eventList.lisaa(t);
 	}
-
 
 	public double nykyaika(){
 		return eventList.getSeuraavanAika();
@@ -195,25 +192,10 @@ public class Engine extends Thread {
 			servicePointStatistics[i] = new ServicePointStatistic(servicepoint.getName(), servicepoint.getBusyTime(), servicepoint.getCompletedServices(),
 					servicepoint.getBusyTime() / this.simulointiaika, servicepoint.getBusyTime() / servicepoint.getCompletedServices());
 		}
-		/*for(Servicepoint servicepoint : this.servicepoints){
-			try {
-				System.out.format("Statistics for %s: \n", servicepoint.getName());
-				System.out.format("Busy time: %f \n", servicepoint.getBusyTime());
-				System.out.format("Service times: %d \n", servicepoint.getCompletedServices());
-				System.out.format("Utilization: %f\n", servicepoint.getBusyTime() / this.simulointiaika);
-				System.out.format("Average service time: %f\n\n", servicepoint.getBusyTime() / servicepoint.getCompletedServices());
-			}catch (ArithmeticException e){
-				System.out.println("Cannot devide by 0.");
-			}
-		}*/
-
 		this.simulatorController.saveStatistics((int) this.simulointiaika, servicePointStatistics);
 
 		System.out.println("Whole simulation: ");
 		System.out.format("Throughput: %f\n", this.simualtedSamples.size() / this.simulointiaika);
 		System.out.format("Simulation ended at: %f\n", this.clock.getTime());
-		
 	}
-	
-	
 }

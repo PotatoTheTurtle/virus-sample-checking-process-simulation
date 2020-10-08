@@ -5,23 +5,17 @@ import eduni.distributions.Negexp;
 import eduni.distributions.Uniform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import view.MainApplication;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class AdvancedSettingsController {
 
     private MainController mainController;
 
-    // Defualt values
+    // Default values
     private int virusSampleSubmissionMinDefault = 1;
     private int virusSampleSubmissionMaxDefault = 5;
     private int backendScanMinDefault = 4;
@@ -33,7 +27,7 @@ public class AdvancedSettingsController {
     private int humanVerifyMinDefault = 5;
     private int humanVerifyMaxDefault = 13;
     private int submissionMinDefault = 15;
-    private int submissionMaxDefualt = 5;
+    private int submissionMaxDefault = 5;
 
 
     @FXML
@@ -74,7 +68,7 @@ public class AdvancedSettingsController {
         this.humanVerifyMin.setText(String.valueOf(this.humanVerifyMinDefault));
         this.humanVerifyMax.setText(String.valueOf(this.humanVerifyMaxDefault));
         this.submissionMin.setText(String.valueOf(this.submissionMinDefault));
-        this.submissionMax.setText(String.valueOf(this.submissionMaxDefualt));
+        this.submissionMax.setText(String.valueOf(this.submissionMaxDefault));
     }
 
     // Methods to verify that the field contains numbers, if not then use default value.
@@ -124,14 +118,12 @@ public class AdvancedSettingsController {
         return new Uniform(this.humanVerifyMinDefault, this.humanVerifyMaxDefault);
     }
 
-
-    //TODO: this is seed, redo this please
     public ContinuousGenerator getSubmissionGenerator(){
         if(!submissionMin.getText().isEmpty() && !submissionMax.getText().isEmpty()){
             if(submissionMin.getText().matches("\\d*") && submissionMax.getText().matches("\\d*")){
                 return new Negexp(Integer.parseInt(submissionMin.getText()), Integer.parseInt(submissionMax.getText()));
             }
         }
-        return new Negexp(this.submissionMinDefault, this.submissionMaxDefualt);
+        return new Negexp(this.submissionMinDefault, this.submissionMaxDefault);
     }
 }

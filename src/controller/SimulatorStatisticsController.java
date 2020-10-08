@@ -96,5 +96,4 @@ public class SimulatorStatisticsController {
         this.infoHelper(4);
         this.selected = 4;
     }
-
 }

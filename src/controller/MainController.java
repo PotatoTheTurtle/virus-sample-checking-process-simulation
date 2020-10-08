@@ -16,7 +16,7 @@ public class MainController {
 
     private AdvancedSettingsController advancedSettingsController;
 
-    private Scene mainMenu = null;
+    private Scene mainMenu;
     private Scene settings;
 
     @FXML
@@ -80,41 +80,41 @@ public class MainController {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Invalid settings");
         StringBuilder stringBuilder = new StringBuilder();
-        boolean flag = true;
+        boolean result = true;
         if(simulationTime.getText().isEmpty()){
             stringBuilder.append("Please enter simulation time.\n");
-            flag = false;
+            result = false;
         }
         if(!simulationTime.getText().matches("\\d*")){
             stringBuilder.append("Please enter simulation time as a number.\n");
-            flag = false;
+            result = false;
         }
         if(simulationTime.getText().matches("\\d*") && !simulationTime.getText().isEmpty()) {
             if (Integer.parseInt(simulationTime.getText()) < 1) {
                 stringBuilder.append("Simulation time must be 1 as minimum, however you cant simulate anything at that time. It is recommended to keep it at 300\n");
-                flag = false;
+                result = false;
             }
         }
-
         if(virusProbability.getText().isEmpty()){
             stringBuilder.append("Please enter virus probability.\n");
-            flag = false;
+            result = false;
         }
         if(!virusProbability.getText().matches("\\d*")){
             stringBuilder.append("Please enter virus probability chance as a number.\n");
-            flag = false;
+            result = false;
         }
         if(virusProbability.getText().matches("\\d*") && !virusProbability.getText().isEmpty()) {
-            if (Integer.parseInt(virusProbability.getText()) > 100 || Integer.parseInt(virusProbability.getText()) < 0) {
-                stringBuilder.append("Virus probability must be max 100 or min 0, ie. 100% or 0% chance.\n");
-                flag = false;
+            int probability = Integer.parseInt(virusProbability.getText());
+            if (!(0 < probability && probability < 100)) {
+                stringBuilder.append("Virus probability must be between 0 and 100, ie. 100% or 0% chance.\n");
+                result = false;
             }
         }
-        if(!flag){
+        if(!result){
             alert.setHeaderText(stringBuilder.toString());
             alert.show();
         }
-        return flag;
+        return result;
     }
 
     public Scene getMainMenu() {
