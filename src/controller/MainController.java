@@ -4,9 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import view.MainApplication;
@@ -25,8 +23,8 @@ public class MainController {
     private Slider sampleSize;
     @FXML
     private TextField simulationTime, virusProbability;
-
-
+    @FXML
+    private MenuBar menuBar;
 
     public MainController(){
         this.advancedSettingsController = new AdvancedSettingsController(this);
@@ -38,6 +36,26 @@ public class MainController {
         settingsLoad.setController(this.advancedSettingsController);
         VBox vBox = settingsLoad.load();
         this.settings = new Scene(vBox);
+    }
+
+    @FXML
+    public void pastResultsButton(ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage) menuBar.getScene().getWindow();
+        FXMLLoader statsLoad = new FXMLLoader(MainApplication.class.getResource("fxml/simulationStats.fxml"));
+        statsLoad.setController(new SimulatorStatisticsController(this));
+        VBox vBox = statsLoad.load();
+        primaryStage.setScene(new Scene(vBox));
+    }
+
+    @FXML
+    public void faqButton() throws IOException {
+        FXMLLoader faqLoad = new FXMLLoader(MainApplication.class.getResource("fxml/faqPage.fxml"));
+        faqLoad.setController(this);
+        VBox vBox = faqLoad.load();
+        Stage stage = new Stage();
+        stage.setTitle("FAQ");
+        stage.setScene(new Scene(vBox));
+        stage.show();
     }
 
     @FXML

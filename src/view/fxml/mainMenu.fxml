@@ -17,12 +17,12 @@
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
+    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="More">
           <items>
-            <MenuItem mnemonicParsing="false" text="Past results" />
-                  <MenuItem mnemonicParsing="false" text="Help" />
+            <MenuItem mnemonicParsing="false" onAction="#pastResultsButton" text="Past results" />
+                  <MenuItem mnemonicParsing="false" onAction="#faqButton" text="FAQ" />
           </items>
         </Menu>
       </menus>

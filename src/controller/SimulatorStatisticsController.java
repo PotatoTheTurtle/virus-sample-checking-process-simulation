@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import model.Engine;
 import model.ServicePointStatistic;
 import model.SimulatorStatistics;
 import model.StatsDAO;
@@ -23,7 +22,6 @@ import java.util.Collections;
 
 public class SimulatorStatisticsController {
 
-    private Engine engine;
     private StatsDAO statsDAO;
     private MainController mainController;
     private int selected = 0;
@@ -33,8 +31,7 @@ public class SimulatorStatisticsController {
     @FXML
     private Label nameLabel, busyTimeLabel, serviceTimesLabel, utilizationLabel, avgServiceTimesLabel, simulationLengthLabel;
 
-    public SimulatorStatisticsController(Engine engine, MainController mainController){
-        this.engine = engine;
+    public SimulatorStatisticsController(MainController mainController){
         this.statsDAO = new StatsDAO();
         this.mainController = mainController;
     }

@@ -96,7 +96,7 @@ public class SimulatorController {
     public void nextPage(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         FXMLLoader simulationRun = new FXMLLoader(MainApplication.class.getResource("fxml/simulationStats.fxml"));
-        simulationRun.setController(new SimulatorStatisticsController(this.engine, this.mainController));
+        simulationRun.setController(new SimulatorStatisticsController(this.mainController));
         primaryStage.setScene(new Scene(simulationRun.load()));
     }
 
