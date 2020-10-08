@@ -60,10 +60,10 @@ public class SimulatorStatisticsController {
     private void infoHelper(int index){
         ServicePointStatistic servicePointStatistic = this.runsList.getSelectionModel().getSelectedItem().getServicepointByIndex(index);
         this.nameLabel.setText(servicePointStatistic.getName());
-        this.busyTimeLabel.setText(String.valueOf(servicePointStatistic.getBusyTime()));
+        this.busyTimeLabel.setText(String.format("%.2f", servicePointStatistic.getBusyTime()));
         this.serviceTimesLabel.setText(String.valueOf(servicePointStatistic.getServiceTimes()));
-        this.utilizationLabel.setText(String.valueOf(servicePointStatistic.getUtilization()));
-        this.avgServiceTimesLabel.setText(String.valueOf(servicePointStatistic.getAvgServiceTime()));
+        this.utilizationLabel.setText(String.format("%d%%", (int) (servicePointStatistic.getUtilization() * 100)));
+        this.avgServiceTimesLabel.setText(String.format("%.2f", servicePointStatistic.getAvgServiceTime()));
         this.simulationLengthLabel.setText(String.valueOf(this.runsList.getSelectionModel().getSelectedItem().getSimulationTime()));
     }
 
