@@ -129,7 +129,6 @@ public class Engine extends Thread {
 				servicepoints[0].lisaaJonoon(sample);
 				arrivalProcess.generoiSeuraava();
 				this.enteredSamples += 1;
-				System.out.println("asd");
 				break;
 			case DEP1:
 				//Backend check
