@@ -6,9 +6,13 @@ import controller.SimulatorController;
 import controller.Tracker;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
+/**
+ * The type Engine.
+ *
+ * @author Ivan Turbin
+ */
 public class Engine extends Thread {
 
 	//Entries
@@ -16,8 +20,6 @@ public class Engine extends Thread {
 	private int probability;
 	private double size;
 	private long delay = 500L;
-	//TODO: Make size min and max, we want random sample sizes not static.
-	//TODO: Parametrize random generators
 	//Service point time variations
 	//Arrival differences
 	
@@ -33,8 +35,13 @@ public class Engine extends Thread {
 	//Stats
 	private ArrayList<VirusSample> simualtedSamples = new ArrayList<>();
 	private int enteredSamples = 0;
-	
 
+
+	/**
+	 * Instantiates a new Engine.
+	 *
+	 * @param simulatorController the simulator controller
+	 */
 	public Engine(SimulatorController simulatorController){
 		System.out.println("Engine ctor");
 		Trace.setTraceLevel(Trace.Level.ERR);
@@ -62,24 +69,47 @@ public class Engine extends Thread {
 		
 	}
 
+	/**
+	 * Get tracker tracker.
+	 *
+	 * @return the tracker
+	 */
 	public Tracker getTracker(){
 		return this.simulatorController.getTracker();
 	}
 
+	/**
+	 * Sets simulointiaika.
+	 *
+	 * @param aika the aika
+	 */
 	public void setSimulointiaika(double aika) {
 		simulointiaika = aika;
 	}
 
+	/**
+	 * Slowdown time.
+	 *
+	 * @param time the time
+	 */
 	public void slowdownTime(int time){
 		this.delay += time;
 	}
 
+	/**
+	 * Speedup time.
+	 *
+	 * @param time the time
+	 */
 	public void speedupTime(int time){
 		if(this.delay - time > 0){
 			this.delay -= time;
 		}
 	}
 
+	/**
+	 * Delay.
+	 */
 	public void delay(){
 		try {
 			sleep(this.delay);
@@ -100,13 +130,19 @@ public class Engine extends Thread {
 		clock.setTime(0); //Reset to 0 incase of second run.
 		this.simulatorController.showNextButton();
 	}
-	
+
+	/**
+	 * Suorita b tapahtumat.
+	 */
 	void suoritaBTapahtumat(){
 		while (eventList.getSeuraavanAika() == clock.getTime()){
 			suoritaTapahtuma(eventList.poista());
 		}
 	}
 
+	/**
+	 * Yrita c tapahtumat.
+	 */
 	void yritaCTapahtumat(){
 		for (Servicepoint p: servicepoints){
 			if (!p.onVarattu() && p.onJonossa()){
@@ -115,7 +151,12 @@ public class Engine extends Thread {
 		}
 	}
 
-	
+
+	/**
+	 * Suorita tapahtuma.
+	 *
+	 * @param event the event
+	 */
 	void suoritaTapahtuma(Event event){
 
 		VirusSample a;
@@ -170,10 +211,20 @@ public class Engine extends Thread {
 		}	
 	}
 
+	/**
+	 * Uusi tapahtuma.
+	 *
+	 * @param t the t
+	 */
 	public void uusiTapahtuma(Event t){
 		eventList.lisaa(t);
 	}
 
+	/**
+	 * Nykyaika double.
+	 *
+	 * @return the double
+	 */
 	public double nykyaika(){
 		return eventList.getSeuraavanAika();
 	}
@@ -192,9 +243,5 @@ public class Engine extends Thread {
 					servicepoint.getBusyTime() / this.simulointiaika, servicepoint.getBusyTime() / servicepoint.getCompletedServices());
 		}
 		this.simulatorController.saveStatistics((int) this.simulointiaika, servicePointStatistics);
-
-		System.out.println("Whole simulation: ");
-		System.out.format("Throughput: %f\n", this.simualtedSamples.size() / this.simulointiaika);
-		System.out.format("Simulation ended at: %f\n", this.clock.getTime());
 	}
 }

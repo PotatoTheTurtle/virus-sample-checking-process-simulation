@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="418.0" y="305.0">model.ArrivalProcess</node>
+    <node x="455.0" y="455.0">model.Clock</node>
+    <node x="370.0" y="380.0">model.EventList</node>
+    <node x="189.0" y="380.0">model.VirusSample</node>
+    <node x="165.0" y="455.0">controller.Tracker</node>
+    <node x="4.0" y="80.0">model.StatsDAO.RunItem</node>
+    <node x="213.0" y="305.0">controller.MainController</node>
+    <node x="0.0" y="0.0">model.StatsDAO</node>
+    <node x="314.0" y="455.0">model.Engine</node>
+    <node x="290.0" y="0.0">controller.SimulatorStatisticsController</node>
+    <node x="245.0" y="230.0">model.SimulatorStatistics</node>
+    <node x="0.0" y="155.0">controller.AdvancedSettingsController</node>
+    <node x="0.0" y="305.0">view.MainApplication</node>
+    <node x="0.0" y="455.0">model.EventType</node>
+    <node x="0.0" y="530.0">model.Event</node>
+    <node x="157.0" y="80.0">model.Trace.Level</node>
+    <node x="0.0" y="380.0">model.Servicepoint</node>
+    <node x="0.0" y="230.0">controller.SimulatorController</node>
+    <node x="157.0" y="0.0">model.Trace</node>
+    <node x="301.0" y="155.0">model.ServicePointStatistic</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.Trace.Level" target="model.Trace">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="model.StatsDAO.RunItem" target="model.StatsDAO">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="639.5" y="423.0" />
+  <SelectedNodes>
+    <node>controller.AdvancedSettingsController</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

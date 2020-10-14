@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="734.6871118012425" y="400.0">model.ArrivalProcess</node>
+    <node x="1084.6871118012425" y="100.0">model.Clock</node>
+    <node x="915.6871118012425" y="400.0">model.EventList</node>
+    <node x="1243.6871118012425" y="210.0">model.VirusSample</node>
+    <node x="1400.6871118012425" y="210.0">controller.Tracker</node>
+    <node x="286.5" y="210.0">model.StatsDAO.RunItem</node>
+    <node x="433.21428571428584" y="860.0">controller.MainController</node>
+    <node x="282.5" y="400.0">model.StatsDAO</node>
+    <node x="978.4880952380953" y="580.0">model.Engine</node>
+    <node x="70.5" y="580.0">controller.SimulatorStatisticsController</node>
+    <node x="0.0" y="210.0">model.SimulatorStatistics</node>
+    <node x="414.50000000000006" y="400.0">controller.AdvancedSettingsController</node>
+    <node x="429.21428571428584" y="940.0">view.MainApplication</node>
+    <node x="788.452380952381" y="100.0">model.EventType</node>
+    <node x="835.2857142857143" y="210.0">model.Event</node>
+    <node x="1232.854632505176" y="100.0">model.Trace.Level</node>
+    <node x="1056.6871118012425" y="400.0">model.Servicepoint</node>
+    <node x="880.8380952380953" y="730.0">controller.SimulatorController</node>
+    <node x="1170.8537784679093" y="0.0">model.Trace</node>
+    <node x="286.9371118012425" y="100.0">model.ServicePointStatistic</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="model.Servicepoint" target="model.Event">
+      <point x="-64.0" y="-15.0" />
+      <point x="1064.6871118012425" y="290.0" />
+      <point x="915.952380952381" y="290.0" />
+      <point x="36.66666666666663" y="15.0" />
+    </edge>
+    <edge source="model.EventList" target="model.Trace">
+      <point x="15.0" y="-15.0" />
+      <point x="989.758980331263" y="70.0" />
+      <point x="1189.7109213250521" y="70.0" />
+      <point x="-25.14285714285711" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.EventType">
+      <point x="-30.0" y="-15.0" />
+      <point x="996.4880952380953" y="520.0" />
+      <point x="720.0565993788821" y="520.0" />
+      <point x="720.0565993788821" y="170.0" />
+      <point x="797.0238095238096" y="170.0" />
+      <point x="-51.428571428571445" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.Event">
+      <point x="-10.0" y="-15.0" />
+      <point x="1016.4880952380953" y="470.0" />
+      <point x="905.1871118012425" y="470.0" />
+      <point x="905.1871118012425" y="320.0" />
+      <point x="871.952380952381" y="320.0" />
+      <point x="-7.333333333333371" y="15.0" />
+    </edge>
+    <edge source="model.Trace.Level" target="model.Trace">
+      <point x="-29.333333333333258" y="-15.0" />
+      <point x="1247.5212991718427" y="80.0" />
+      <point x="1214.8537784679093" y="80.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.MainController" target="controller.SimulatorController">
+      <point x="33.33333333333337" y="-15.0" />
+      <point x="546.5476190476193" y="810.0" />
+      <point x="905.8380952380953" y="810.0" />
+      <point x="-75.0" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorController" target="model.Engine">
+      <point x="-13.333333333333258" y="-15.0" />
+      <point x="967.5047619047621" y="630.0" />
+      <point x="988.0880952380953" y="630.0" />
+      <point x="-38.39999999999998" y="15.0" />
+    </edge>
+    <edge source="model.ArrivalProcess" target="model.EventType">
+      <point x="-64.0" y="-15.0" />
+      <point x="750.6871118012425" y="380.0" />
+      <point x="770.104632505176" y="380.0" />
+      <point x="770.104632505176" y="180.0" />
+      <point x="814.1666666666667" y="180.0" />
+      <point x="-34.285714285714334" y="15.0" />
+    </edge>
+    <edge source="model.StatsDAO" target="model.StatsDAO.RunItem">
+      <point x="-16.0" y="-15.0" />
+      <point x="322.5" y="360.0" />
+      <point x="303.83333333333326" y="360.0" />
+      <point x="-34.666666666666686" y="15.0" />
+    </edge>
+    <edge source="model.VirusSample" target="model.Trace">
+      <point x="45.3333333333332" y="-15.0" />
+      <point x="1357.0204451345758" y="190.0" />
+      <point x="1360.5212991718427" y="190.0" />
+      <point x="1360.5212991718427" y="50.0" />
+      <point x="1252.568064182195" y="50.0" />
+      <point x="37.71428571428578" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorController" target="controller.AdvancedSettingsController">
+      <point x="-53.33333333333326" y="-15.0" />
+      <point x="927.5047619047621" y="680.0" />
+      <point x="595.9396221532095" y="680.0" />
+      <point x="595.9396221532095" y="560.0" />
+      <point x="579.0714285714287" y="560.0" />
+      <point x="36.57142857142867" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorStatisticsController" target="model.SimulatorStatistics">
+      <point x="-56.0" y="-15.0" />
+      <point x="154.5" y="550.0" />
+      <point x="55.5" y="550.0" />
+      <point x="55.5" y="380.0" />
+      <point x="75.0" y="380.0" />
+      <point x="-25.0" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="controller.Tracker">
+      <point x="46.0" y="-15.0" />
+      <point x="1072.4880952380954" y="560.0" />
+      <point x="1417.2946946169773" y="560.0" />
+      <point x="1417.2946946169773" y="380.0" />
+      <point x="1422.9728260869567" y="380.0" />
+      <point x="-29.71428571428578" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorController" target="model.ServicePointStatistic">
+      <point x="-26.66666666666663" y="-15.0" />
+      <point x="954.1714285714287" y="660.0" />
+      <point x="681.0" y="660.0" />
+      <point x="681.0" y="170.0" />
+      <point x="435.4371118012425" y="170.0" />
+      <point x="40.5" y="15.0" />
+    </edge>
+    <edge source="controller.AdvancedSettingsController" target="controller.MainController">
+      <point x="0.0" y="15.0" />
+      <point x="542.5" y="560.0" />
+      <point x="532.1896221532095" y="560.0" />
+      <point x="532.1896221532095" y="840.0" />
+      <point x="533.2142857142858" y="840.0" />
+      <point x="20.0" y="-15.0" />
+    </edge>
+    <edge source="controller.SimulatorController" target="controller.MainController">
+      <point x="-25.0" y="15.0" />
+      <point x="955.8380952380953" y="820.0" />
+      <point x="559.8809523809525" y="820.0" />
+      <point x="46.66666666666663" y="-15.0" />
+    </edge>
+    <edge source="controller.MainController" target="view.MainApplication">
+      <point x="40.0" y="15.0" />
+      <point x="553.2142857142858" y="915.0" />
+      <point x="534.2142857142858" y="915.0" />
+      <point x="21.0" y="-15.0" />
+    </edge>
+    <edge source="model.Servicepoint" target="model.Engine">
+      <point x="28.799999999999955" y="15.0" />
+      <point x="1157.4871118012425" y="490.0" />
+      <point x="1044.4880952380954" y="490.0" />
+      <point x="18.0" y="-15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.ArrivalProcess">
+      <point x="-26.0" y="-15.0" />
+      <point x="1000.4880952380953" y="510.0" />
+      <point x="754.6871118012425" y="510.0" />
+      <point x="-60.0" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.EventList">
+      <point x="-6.0" y="-15.0" />
+      <point x="1020.4880952380953" y="460.0" />
+      <point x="945.6871118012425" y="460.0" />
+      <point x="-30.0" y="15.0" />
+    </edge>
+    <edge source="controller.MainController" target="controller.AdvancedSettingsController">
+      <point x="-20.0" y="-15.0" />
+      <point x="493.21428571428584" y="800.0" />
+      <point x="469.02336956521765" y="800.0" />
+      <point x="469.02336956521765" y="560.0" />
+      <point x="432.78571428571433" y="560.0" />
+      <point x="-109.71428571428572" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.Trace.Level">
+      <point x="42.0" y="-15.0" />
+      <point x="1068.4880952380954" y="550.0" />
+      <point x="1390.1871118012425" y="550.0" />
+      <point x="1390.1871118012425" y="180.0" />
+      <point x="1309.854632505176" y="180.0" />
+      <point x="33.0" y="15.0" />
+    </edge>
+    <edge source="model.Servicepoint" target="model.EventType">
+      <point x="-48.0" y="-15.0" />
+      <point x="1080.6871118012425" y="280.0" />
+      <point x="933.7857142857143" y="280.0" />
+      <point x="933.7857142857143" y="180.0" />
+      <point x="882.7380952380952" y="180.0" />
+      <point x="34.28571428571422" y="15.0" />
+    </edge>
+    <edge source="model.VirusSample" target="model.Clock">
+      <point x="-45.33333333333326" y="-15.0" />
+      <point x="1266.3537784679093" y="170.0" />
+      <point x="1163.8871118012426" y="170.0" />
+      <point x="35.200000000000045" y="15.0" />
+    </edge>
+    <edge source="model.ArrivalProcess" target="model.Engine">
+      <point x="20.0" y="15.0" />
+      <point x="834.6871118012425" y="490.0" />
+      <point x="1008.4880952380953" y="490.0" />
+      <point x="-18.0" y="-15.0" />
+    </edge>
+    <edge source="controller.SimulatorController" target="controller.SimulatorStatisticsController">
+      <point x="-93.33333333333337" y="-15.0" />
+      <point x="887.504761904762" y="710.0" />
+      <point x="327.16666666666663" y="710.0" />
+      <point x="116.66666666666663" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorStatisticsController" target="model.ServicePointStatistic">
+      <point x="0.0" y="-15.0" />
+      <point x="210.5" y="190.0" />
+      <point x="354.4371118012425" y="190.0" />
+      <point x="-40.5" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorStatisticsController" target="model.StatsDAO">
+      <point x="56.0" y="-15.0" />
+      <point x="266.5" y="560.0" />
+      <point x="296.5" y="560.0" />
+      <point x="-42.0" y="15.0" />
+    </edge>
+    <edge source="view.MainApplication" target="controller.MainController">
+      <point x="-21.0" y="-15.0" />
+      <point x="492.21428571428584" y="915.0" />
+      <point x="473.21428571428584" y="915.0" />
+      <point x="-40.0" y="15.0" />
+    </edge>
+    <edge source="model.EventList" target="model.Trace.Level">
+      <point x="45.0" y="-15.0" />
+      <point x="1020.6871118012425" y="340.0" />
+      <point x="1222.1871118012425" y="340.0" />
+      <point x="1222.1871118012425" y="180.0" />
+      <point x="1243.854632505176" y="180.0" />
+      <point x="-33.0" y="15.0" />
+    </edge>
+    <edge source="model.Servicepoint" target="model.Clock">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="controller.MainController">
+      <point x="38.40000000000009" y="15.0" />
+      <point x="1064.8880952380955" y="660.0" />
+      <point x="1091.3380952380953" y="660.0" />
+      <point x="1091.3380952380953" y="840.0" />
+      <point x="586.5476190476193" y="840.0" />
+      <point x="73.33333333333337" y="-15.0" />
+    </edge>
+    <edge source="controller.SimulatorController" target="model.StatsDAO">
+      <point x="-80.0" y="-15.0" />
+      <point x="900.8380952380953" y="700.0" />
+      <point x="361.00000000000006" y="700.0" />
+      <point x="361.00000000000006" y="560.0" />
+      <point x="352.5" y="560.0" />
+      <point x="14.0" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.VirusSample">
+      <point x="38.0" y="-15.0" />
+      <point x="1064.4880952380954" y="540.0" />
+      <point x="1346.854632505176" y="540.0" />
+      <point x="1346.854632505176" y="370.0" />
+      <point x="1366.0871118012426" y="370.0" />
+      <point x="54.400000000000034" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorStatisticsController" target="view.MainApplication">
+      <point x="-116.66666666666663" y="15.0" />
+      <point x="93.83333333333337" y="710.0" />
+      <point x="172.60377846790914" y="710.0" />
+      <point x="172.60377846790914" y="915.0" />
+      <point x="450.21428571428584" y="915.0" />
+      <point x="-63.0" y="-15.0" />
+    </edge>
+    <edge source="controller.SimulatorController" target="controller.Tracker">
+      <point x="40.0" y="-15.0" />
+      <point x="1020.8380952380953" y="670.0" />
+      <point x="1428.2946946169773" y="670.0" />
+      <point x="1428.2946946169773" y="380.0" />
+      <point x="1437.8299689440996" y="380.0" />
+      <point x="-14.85714285714289" y="15.0" />
+    </edge>
+    <edge source="controller.MainController" target="controller.SimulatorStatisticsController">
+      <point x="-73.33333333333337" y="-15.0" />
+      <point x="439.88095238095246" y="840.0" />
+      <point x="186.6871118012425" y="840.0" />
+      <point x="186.6871118012425" y="700.0" />
+      <point x="140.5" y="700.0" />
+      <point x="-70.0" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.ServicePointStatistic">
+      <point x="-38.0" y="-15.0" />
+      <point x="988.4880952380953" y="540.0" />
+      <point x="696.0" y="540.0" />
+      <point x="696.0" y="150.0" />
+      <point x="489.4371118012425" y="150.0" />
+      <point x="94.5" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorController" target="view.MainApplication">
+      <point x="75.0" y="15.0" />
+      <point x="1055.8380952380953" y="915.0" />
+      <point x="576.2142857142858" y="915.0" />
+      <point x="63.0" y="-15.0" />
+    </edge>
+    <edge source="model.StatsDAO" target="model.SimulatorStatistics">
+      <point x="-48.0" y="-15.0" />
+      <point x="290.5" y="380.0" />
+      <point x="125.0" y="380.0" />
+      <point x="25.0" y="15.0" />
+    </edge>
+    <edge source="model.EventList" target="model.Event">
+      <point x="-45.0" y="-15.0" />
+      <point x="930.6871118012425" y="310.0" />
+      <point x="886.6190476190477" y="310.0" />
+      <point x="7.333333333333371" y="15.0" />
+    </edge>
+    <edge source="model.Servicepoint" target="model.VirusSample">
+      <point x="32.0" y="-15.0" />
+      <point x="1160.6871118012425" y="360.0" />
+      <point x="1257.2871118012424" y="360.0" />
+      <point x="-54.40000000000009" y="15.0" />
+    </edge>
+    <edge source="model.Event" target="model.EventType">
+      <point x="-22.0" y="-15.0" />
+      <point x="857.2857142857143" y="190.0" />
+      <point x="848.452380952381" y="190.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="controller.Tracker" target="controller.SimulatorController">
+      <point x="44.57142857142867" y="15.0" />
+      <point x="1497.2585403726712" y="380.0" />
+      <point x="1488.1666666666667" y="380.0" />
+      <point x="1488.1666666666667" y="710.0" />
+      <point x="1074.1714285714286" y="710.0" />
+      <point x="93.33333333333326" y="-15.0" />
+    </edge>
+    <edge source="model.SimulatorStatistics" target="model.ServicePointStatistic">
+      <point x="-50.0" y="-15.0" />
+      <point x="50.0" y="170.0" />
+      <point x="300.4371118012425" y="170.0" />
+      <point x="-94.5" y="15.0" />
+    </edge>
+    <edge source="model.ArrivalProcess" target="model.Clock">
+      <point x="64.0" y="-15.0" />
+      <point x="878.6871118012425" y="330.0" />
+      <point x="1023.008980331263" y="330.0" />
+      <point x="1023.008980331263" y="180.0" />
+      <point x="1093.4871118012425" y="180.0" />
+      <point x="-35.200000000000045" y="15.0" />
+    </edge>
+    <edge source="model.StatsDAO.RunItem" target="model.StatsDAO">
+      <point x="34.66666666666663" y="15.0" />
+      <point x="373.16666666666663" y="360.0" />
+      <point x="354.5" y="360.0" />
+      <point x="16.0" y="-15.0" />
+    </edge>
+    <edge source="model.Engine" target="controller.SimulatorController">
+      <point x="0.0" y="15.0" />
+      <point x="1026.4880952380954" y="650.0" />
+      <point x="994.1714285714287" y="650.0" />
+      <point x="13.333333333333371" y="-15.0" />
+    </edge>
+    <edge source="model.Trace" target="model.Trace.Level">
+      <point x="12.571428571428669" y="15.0" />
+      <point x="1227.425207039338" y="70.0" />
+      <point x="1276.854632505176" y="70.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.Clock">
+      <point x="2.0" y="-15.0" />
+      <point x="1028.4880952380954" y="450.0" />
+      <point x="1046.1871118012425" y="450.0" />
+      <point x="1046.1871118012425" y="190.0" />
+      <point x="1111.0871118012426" y="190.0" />
+      <point x="-17.59999999999991" y="15.0" />
+    </edge>
+    <edge source="model.Servicepoint" target="model.Trace">
+      <point x="-16.0" y="-15.0" />
+      <point x="1112.6871118012425" y="260.0" />
+      <point x="1012.008980331263" y="260.0" />
+      <point x="1012.008980331263" y="80.0" />
+      <point x="1202.2823498964806" y="80.0" />
+      <point x="-12.571428571428669" y="15.0" />
+    </edge>
+    <edge source="model.ArrivalProcess" target="model.Event">
+      <point x="0.0" y="-15.0" />
+      <point x="814.6871118012425" y="370.0" />
+      <point x="842.6190476190477" y="370.0" />
+      <point x="-36.66666666666663" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.Trace">
+      <point x="-34.0" y="-15.0" />
+      <point x="992.4880952380953" y="530.0" />
+      <point x="710.0" y="530.0" />
+      <point x="710.0" y="60.0" />
+      <point x="1177.1394927536235" y="60.0" />
+      <point x="-37.71428571428578" y="15.0" />
+    </edge>
+    <edge source="model.StatsDAO" target="model.ServicePointStatistic">
+      <point x="48.0" y="-15.0" />
+      <point x="386.5" y="380.0" />
+      <point x="449.06891821946175" y="380.0" />
+      <point x="449.06891821946175" y="180.0" />
+      <point x="408.4371118012425" y="180.0" />
+      <point x="13.5" y="15.0" />
+    </edge>
+    <edge source="model.VirusSample" target="model.Trace.Level">
+      <point x="0.0" y="-15.0" />
+      <point x="1311.6871118012425" y="190.0" />
+      <point x="1287.854632505176" y="190.0" />
+      <point x="11.0" y="15.0" />
+    </edge>
+    <edge source="model.Servicepoint" target="model.Trace.Level">
+      <point x="16.0" y="-15.0" />
+      <point x="1144.6871118012425" y="350.0" />
+      <point x="1233.1871118012425" y="350.0" />
+      <point x="1233.1871118012425" y="190.0" />
+      <point x="1265.854632505176" y="190.0" />
+      <point x="-11.0" y="15.0" />
+    </edge>
+    <edge source="controller.SimulatorStatisticsController" target="controller.MainController">
+      <point x="-23.33333333333337" y="15.0" />
+      <point x="187.16666666666663" y="690.0" />
+      <point x="197.6871118012425" y="690.0" />
+      <point x="197.6871118012425" y="830.0" />
+      <point x="453.2142857142858" y="830.0" />
+      <point x="-60.00000000000006" y="-15.0" />
+    </edge>
+    <edge source="model.Engine" target="model.Servicepoint">
+      <point x="6.0" y="-15.0" />
+      <point x="1032.4880952380954" y="460.0" />
+      <point x="1071.0871118012426" y="460.0" />
+      <point x="-57.59999999999991" y="15.0" />
+    </edge>
+    <edge source="model.Engine" target="controller.AdvancedSettingsController">
+      <point x="-46.0" y="-15.0" />
+      <point x="980.4880952380953" y="560.0" />
+      <point x="652.2142857142858" y="560.0" />
+      <point x="109.71428571428578" y="15.0" />
+    </edge>
+    <edge source="model.Servicepoint" target="controller.Tracker">
+      <point x="64.0" y="-15.0" />
+      <point x="1192.6871118012425" y="380.0" />
+      <point x="1408.1156832298138" y="380.0" />
+      <point x="-44.57142857142867" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7326315789473684" x="639.5" y="481.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
