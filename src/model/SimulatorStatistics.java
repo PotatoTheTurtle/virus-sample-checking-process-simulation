@@ -1,46 +1,51 @@
 package model;
 
-import java.util.Arrays;
 import java.util.Calendar;
 
+/**
+ * The type Simulator statistics.
+ */
 public class SimulatorStatistics implements Comparable<SimulatorStatistics>  {
 
-    private int runID;
     private int simulationTime;
-    private long runTime;
     private ServicePointStatistic[] servicePointStatistics;
     private Calendar calendar;
 
-    public SimulatorStatistics(int runID, int simulationTime, long runTime, ServicePointStatistic[] servicePointStatistics){
-        this.runID = runID;
+    /**
+     * Instantiates a new object for simulator statistics.
+     * Simulator statics stores the whole simulation statics including servicepoints.
+     *
+     * @param simulationTime         the total simulation time
+     * @param runTime                the run time in milliseconds
+     * @param servicePointStatistics the service point statistics
+     */
+    public SimulatorStatistics(int simulationTime, long runTime, ServicePointStatistic[] servicePointStatistics){
         this.simulationTime = simulationTime;
-        this.runTime = runTime;
         this.servicePointStatistics = servicePointStatistics;
         this.calendar = Calendar.getInstance();
         this.calendar.setTimeInMillis(runTime);
     }
 
-    public ServicePointStatistic[] getServicePointStatistics(){
-        return this.servicePointStatistics;
-    }
-
-    public int getRunID() {
-        return runID;
-    }
-
+    /**
+     * Gets total simulation time.
+     *
+     * @return the total simulation time
+     */
     public int getSimulationTime() {
         return simulationTime;
     }
 
-    public long getRunTime() {
-        return runTime;
-    }
-
+    /**
+     * Get servicepoint by index (0-4)
+     *
+     * @param index the index of the service point (servicepoint_id - 1)
+     * @return the servicepoint statistic
+     */
     public ServicePointStatistic getServicepointByIndex(int index){
         return this.servicePointStatistics[index];
     }
 
-    public Calendar getCalendar() {
+    private Calendar getCalendar() {
         return this.calendar;
     }
 

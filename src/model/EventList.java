@@ -2,24 +2,38 @@ package model;
 
 import java.util.PriorityQueue;
 
+/**
+ * The EventList to store events
+ */
 public class EventList {
-	private PriorityQueue<Event> lista = new PriorityQueue<Event>();
-	
-	public EventList(){
-	 
+	private PriorityQueue<Event> eventList = new PriorityQueue<Event>();
+
+	/**
+	 * Delete event from eventList.
+	 *
+	 * @return the removed event
+	 */
+	public Event deleteEvent(){
+		Trace.out(Trace.Level.INFO,"Delete " + eventList.peek());
+		return eventList.remove();
 	}
-	
-	public Event poista(){
-		Trace.out(Trace.Level.INFO,"Poisto " + lista.peek());
-		return lista.remove();
+
+	/**
+	 * Add to event list
+	 *
+	 * @param event the event to be added
+	 */
+	public void add(Event event){
+		eventList.add(event);
 	}
-	
-	public void lisaa(Event t){
-		lista.add(t);
-	}
-	
-	public double getSeuraavanAika(){
-		return lista.peek().getAika();
+
+	/**
+	 * Get next event time
+	 *
+	 * @return the next event time as double
+	 */
+	public double getNextTime(){
+		return eventList.peek().getTime();
 	}
 	
 	

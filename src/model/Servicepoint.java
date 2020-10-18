@@ -3,15 +3,18 @@ package model;
 import java.util.LinkedList;
 import java.util.Random;
 
-import controller.Tracker;
 import eduni.distributions.ContinuousGenerator;
 
 
+/**
+ * The service point where an event is processed.
+ * Service point also controls some of the UI elements when simulation is in progress.
+ */
 public class Servicepoint {
 
 	private Engine engine;
 
-	private LinkedList<VirusSample> jono = new LinkedList<>();
+	private LinkedList<VirusSample> queue = new LinkedList<>();
 	private ContinuousGenerator generator;
 	private EventType scheduledEventType;
 
@@ -19,94 +22,145 @@ public class Servicepoint {
 	private double busyTime = 0;
 	private int completedServices = 0;
 	private int serviceID = 0;
-	private Tracker tracker;
 
-	private boolean varattu = false;
+	private boolean inUse = false;
 	private boolean skippable = false;
 
 
-	public Servicepoint(int serviceID ,String name, ContinuousGenerator generator, Engine engine, EventType tyyppi, boolean skippable){
+	/**
+	 * Instantiates a new Servicepoint.
+	 *
+	 * @param serviceID the service id
+	 * @param name      the service name
+	 * @param generator the generator to be used
+	 * @param engine    the engine
+	 * @param eventType the service eventType
+	 * @param skippable is service skippable
+	 */
+	public Servicepoint(int serviceID, String name, ContinuousGenerator generator, Engine engine, EventType eventType, boolean skippable){
 		this.engine = engine;
 		this.generator = generator;
-		this.scheduledEventType = tyyppi;
+		this.scheduledEventType = eventType;
 		this.name = name;
 		this.skippable = skippable;
 		this.serviceID = serviceID;
 	}
 
-	public void lisaaJonoon(VirusSample a){
+	/**
+	 * Add virus sample to queue.
+	 * Update simulation UI queue size and circles
+	 *
+	 * @param virusSample the virus sample to be added.
+	 */
+	public void addToQueue(VirusSample virusSample){
 		this.engine.getTracker().setCircleStatus(this.serviceID, true);
-		jono.add(a);
-		this.engine.getTracker().setServicepointLabel(this.serviceID, jono.size());
+		queue.add(virusSample);
+		this.engine.getTracker().setServicepointLabel(this.serviceID, queue.size());
 	}
 
-	public VirusSample otaJonosta(){
-		if(this.jono.size() == 1){
+	/**
+	 * Take virus sample from queue.
+	 * Update simulation UI queue size and circles
+	 *
+	 * @return the taken virus sample from the queue.
+	 */
+	public VirusSample takeFromQueue(){
+		if(this.queue.size() == 1){
 			this.engine.getTracker().setCircleStatus(this.serviceID, false);
 		}
-		this.engine.getTracker().setServicepointLabel(this.serviceID, jono.size() - 1);
-		varattu = false;
+		this.engine.getTracker().setServicepointLabel(this.serviceID, queue.size() - 1);
+		inUse = false;
 		this.completedServices += 1;
-		return this.jono.poll();
+		return this.queue.poll();
 	}
 
-	public void aloitaPalvelu(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
-		if(jono.size() == 0){
+	/**
+	 * Start service
+	 * Process current event and virus sample
+	 * Check if virus sample is virus, works only if service can be skipped
+	 * Busy time depends on virus size and generator
+	 *
+	 * Sets the circle in UI when virus sample is being processed
+	 */
+	public void startService(){  //Aloitetaan uusi palvelu, asiakas on jonossa palvelun aikana
+		if(queue.size() == 0){
 			Trace.out(Trace.Level.ERR, "CANT START SERVICE EMPTY QUEUE");
 			return;
 		}
 
-		varattu = true;
+		inUse = true;
 		double palveluaika = generator.sample();
-		double size = jono.peek().getSize();
+		double size = queue.peek().getSize();
 		this.busyTime += palveluaika * size;
 
 		//If scan detected test sample as real virus then skip all other verification methods
 		Random random = new Random();
-		if((jono.peek().getVirusProbability() >= random.nextInt(100) + 1) && this.skippable){
+		if((queue.peek().getVirusProbability() >= random.nextInt(100) + 1) && this.skippable){
 			System.out.println("Skipped " + this.name);
-			jono.poll();
-			varattu = false;
+			queue.poll();
+			inUse = false;
 			this.completedServices += 1;
 			this.engine.getTracker().setSkipCircle(this.serviceID, true);
-			engine.uusiTapahtuma(new Event(EventType.SKIP, Clock.getInstance().getTime() + (palveluaika * size)));
+			engine.newEvent(new Event(EventType.SKIP, Clock.getInstance().getTime() + (palveluaika * size)));
 		}else{
 			this.engine.getTracker().setSkipCircle(this.serviceID, false);
-			engine.uusiTapahtuma(new Event(this.scheduledEventType, Clock.getInstance().getTime() + (palveluaika * size)));
+			engine.newEvent(new Event(this.scheduledEventType, Clock.getInstance().getTime() + (palveluaika * size)));
 		}
 	}
 
 
-	public boolean onVarattu(){
-		return varattu;
+	/**
+	 * Check if service is in use.
+	 *
+	 * @return the boolean
+	 */
+	public boolean isInUse(){
+		return inUse;
 	}
 
+	/**
+	 * Get service total busy time.
+	 *
+	 * @return busy time double
+	 */
 	public double getBusyTime(){
 		return this.busyTime;
 	}
 
+	/**
+	 * Get completed services
+	 *
+	 * @return amount of completed services as int
+	 */
 	public int getCompletedServices(){
 		return this.completedServices;
 	}
 
-	public boolean onJonossa(){
-		return jono.size() != 0;
+	/**
+	 * Check if any virus sample is in queue
+	 *
+	 * @return the boolean
+	 */
+	public boolean isInQueue(){
+		return queue.size() != 0;
 	}
 
-	public int getJonoSize(){
-		return jono.size();
+	/**
+	 * Get queue size int.
+	 *
+	 * @return size as int
+	 */
+	public int getQueueSize(){
+		return queue.size();
 	}
 
+	/**
+	 * Get service name
+	 *
+	 * @return the name as string
+	 */
 	public String getName(){
 		return this.name;
-	}
-
-	public int getServiceID() {
-		return this.serviceID;
-	}
-
-	public void setServiceID(int serviceID) {
-		this.serviceID = serviceID;
 	}
 
 }

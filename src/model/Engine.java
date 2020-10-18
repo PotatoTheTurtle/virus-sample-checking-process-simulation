@@ -5,23 +5,22 @@ import controller.MainController;
 import controller.SimulatorController;
 import controller.Tracker;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * The type Engine.
+ * The Engine
+ * This is the center point of the simulator
+ * The engine creates service points and moves events in order
  *
  * @author Ivan Turbin
  */
 public class Engine extends Thread {
 
 	//Entries
-	private double simulointiaika;
+	private double simulationTime;
 	private int probability;
 	private double size;
 	private long delay = 500L;
-	//Service point time variations
-	//Arrival differences
 	
 	private Servicepoint[] servicepoints = new Servicepoint[5];
 	private Clock clock;
@@ -32,23 +31,21 @@ public class Engine extends Thread {
 	private AdvancedSettingsController advancedSettingsController;
 	private MainController mainController;
 
-	//Stats
-	private ArrayList<VirusSample> simualtedSamples = new ArrayList<>();
-	private int enteredSamples = 0;
-
 
 	/**
 	 * Instantiates a new Engine.
+	 * Creates 5 service points
+	 * Sets clock
+	 * Generates first arrival
 	 *
 	 * @param simulatorController the simulator controller
 	 */
 	public Engine(SimulatorController simulatorController){
-		System.out.println("Engine ctor");
 		Trace.setTraceLevel(Trace.Level.ERR);
 		this.simulatorController = simulatorController;
 		this.mainController = simulatorController.getMainController();
 		this.advancedSettingsController = simulatorController.getAdvancedSettingsController();
-		this.simulointiaika = this.mainController.getSimulationTime();
+		this.simulationTime = this.mainController.getSimulationTime();
 		this.probability = this.mainController.getVirusProbability();
 		this.size = this.mainController.getSampleSize();
 
@@ -65,12 +62,12 @@ public class Engine extends Thread {
 		
 		arrivalProcess = new ArrivalProcess(this, this.advancedSettingsController.getSubmissionGenerator(), EventType.ARR1);
 		eventList = new EventList();
-		arrivalProcess.generoiSeuraava(); // Ensimmäinen saapuminen!!
+		arrivalProcess.generateNext(); // Ensimmäinen saapuminen!!
 		
 	}
 
 	/**
-	 * Get tracker tracker.
+	 * Get tracker object from simulator controller.
 	 *
 	 * @return the tracker
 	 */
@@ -79,18 +76,9 @@ public class Engine extends Thread {
 	}
 
 	/**
-	 * Sets simulointiaika.
-	 *
-	 * @param aika the aika
-	 */
-	public void setSimulointiaika(double aika) {
-		simulointiaika = aika;
-	}
-
-	/**
 	 * Slowdown time.
 	 *
-	 * @param time the time
+	 * @param time the time to slowdown by
 	 */
 	public void slowdownTime(int time){
 		this.delay += time;
@@ -99,7 +87,7 @@ public class Engine extends Thread {
 	/**
 	 * Speedup time.
 	 *
-	 * @param time the time
+	 * @param time the time to speedup by
 	 */
 	public void speedupTime(int time){
 		if(this.delay - time > 0){
@@ -107,103 +95,85 @@ public class Engine extends Thread {
 		}
 	}
 
-	/**
-	 * Delay.
-	 */
-	public void delay(){
+	private void delay(){
 		try {
 			sleep(this.delay);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void run(){
-		while (simuloidaan()){
+		while (simulating()){
 			this.delay();
-			clock.setTime(nykyaika());
-			suoritaBTapahtumat();
-			yritaCTapahtumat();
+			clock.setTime(currentTime());
+			completeBEvents();
+			tryCEvents();
 			this.simulatorController.updateSimulationTime(clock.getTime());
 		}
-		tulokset();
+		results();
 		clock.setTime(0); //Reset to 0 incase of second run.
 		this.simulatorController.showNextButton();
 	}
 
-	/**
-	 * Suorita b tapahtumat.
-	 */
-	void suoritaBTapahtumat(){
-		while (eventList.getSeuraavanAika() == clock.getTime()){
-			suoritaTapahtuma(eventList.poista());
+	private void completeBEvents(){
+		while (eventList.getNextTime() == clock.getTime()){
+			completeEvent(eventList.deleteEvent());
 		}
 	}
 
-	/**
-	 * Yrita c tapahtumat.
-	 */
-	void yritaCTapahtumat(){
+	private void tryCEvents(){
 		for (Servicepoint p: servicepoints){
-			if (!p.onVarattu() && p.onJonossa()){
-				p.aloitaPalvelu();
+			if (!p.isInUse() && p.isInQueue()){
+				p.startService();
 			}
 		}
 	}
 
+	private void completeEvent(Event event){
 
-	/**
-	 * Suorita tapahtuma.
-	 *
-	 * @param event the event
-	 */
-	void suoritaTapahtuma(Event event){
-
-		VirusSample a;
-		switch (event.getTyyppi()){
+		VirusSample virusSample;
+		switch (event.getType()){
 			
 			case ARR1:
 				//Enter submission
 				Random random = new Random();
 				VirusSample sample = new VirusSample(this.size, random.nextInt(this.probability) + 1);
 				sample.setArrivalTime(this.clock.getTime());
-				servicepoints[0].lisaaJonoon(sample);
-				arrivalProcess.generoiSeuraava();
-				this.enteredSamples += 1;
+				servicepoints[0].addToQueue(sample);
+				arrivalProcess.generateNext();
 				break;
 			case DEP1:
 				//Backend check
-				a = servicepoints[0].otaJonosta();
-				servicepoints[1].lisaaJonoon(a);
+				virusSample = servicepoints[0].takeFromQueue();
+				servicepoints[1].addToQueue(virusSample);
 				break;
 			case DEP2:
 				//Robot verification
-				a = servicepoints[1].otaJonosta();
+				virusSample = servicepoints[1].takeFromQueue();
 
 				//Mennään aina pienimpään jonoon
 				//Check jos palvelu on vapaana ja jos on niin mene sinne jonoon
-				if(servicepoints[2].getJonoSize() > servicepoints[3].getJonoSize()){
-					servicepoints[3].lisaaJonoon(a);
+				if(servicepoints[2].getQueueSize() > servicepoints[3].getQueueSize()){
+					servicepoints[3].addToQueue(virusSample);
 				}else{
-					servicepoints[2].lisaaJonoon(a);
+					servicepoints[2].addToQueue(virusSample);
 				}
 
 				break;
 			case DEP3:
 				//Human verification
-				if(servicepoints[2].getJonoSize() > servicepoints[3].getJonoSize()){
-					a = servicepoints[2].otaJonosta();
+				if(servicepoints[2].getQueueSize() > servicepoints[3].getQueueSize()){
+					virusSample = servicepoints[2].takeFromQueue();
 				}else{
-					a = servicepoints[3].otaJonosta();
+					virusSample = servicepoints[3].takeFromQueue();
 				}
 
-				servicepoints[4].lisaaJonoon(a);
+				servicepoints[4].addToQueue(virusSample);
 				break;
 			case DEP4:
 				//Stats
-				a = servicepoints[4].otaJonosta();
-				a.setDepartureTime(clock.getTime());
-				this.simualtedSamples.add(a);
+				servicepoints[4].takeFromQueue();
 				break;
 			case SKIP:
 				System.out.println("SKIP EVENT");
@@ -212,36 +182,31 @@ public class Engine extends Thread {
 	}
 
 	/**
-	 * Uusi tapahtuma.
+	 * Add new event to the event list.
 	 *
-	 * @param t the t
+	 * @param event the event to add.
 	 */
-	public void uusiTapahtuma(Event t){
-		eventList.lisaa(t);
+	public void newEvent(Event event){
+		eventList.add(event);
 	}
 
-	/**
-	 * Nykyaika double.
-	 *
-	 * @return the double
-	 */
-	public double nykyaika(){
-		return eventList.getSeuraavanAika();
+	private double currentTime(){
+		return eventList.getNextTime();
 	}
 	
-	private boolean simuloidaan(){
-		Trace.out(Trace.Level.INFO, "Kello on: " + clock.getTime());
-		return clock.getTime() < simulointiaika;
+	private boolean simulating(){
+		Trace.out(Trace.Level.INFO, "Time is: " + clock.getTime());
+		return clock.getTime() < simulationTime;
 	}
 	
-	private void tulokset(){
+	private void results(){
 		System.out.println(clock.getTime());
 		ServicePointStatistic[] servicePointStatistics = new ServicePointStatistic[this.servicepoints.length];
 		for(int i = 0; i < this.servicepoints.length; i++){
 			Servicepoint servicepoint = this.servicepoints[i];
 			servicePointStatistics[i] = new ServicePointStatistic(servicepoint.getName(), servicepoint.getBusyTime(), servicepoint.getCompletedServices(),
-					servicepoint.getBusyTime() / this.simulointiaika, servicepoint.getBusyTime() / servicepoint.getCompletedServices());
+					servicepoint.getBusyTime() / this.simulationTime, servicepoint.getBusyTime() / servicepoint.getCompletedServices());
 		}
-		this.simulatorController.saveStatistics((int) this.simulointiaika, servicePointStatistics);
+		this.simulatorController.saveStatistics((int) this.simulationTime, servicePointStatistics);
 	}
 }

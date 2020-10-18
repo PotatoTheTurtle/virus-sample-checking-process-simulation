@@ -2,19 +2,24 @@ package model;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 
+/**
+ * Statistics Data Access Object , used to store data on SQL server.
+ * Please have SIMULATOR database made with username: simu and password: simu.
+ *
+ * You can also find "createTable.sql" in sql folder of this project. Use that to initialize that database.
+ */
 public class StatsDAO {
 
-    final String URL = "jdbc:mysql://localhost/SIMULATOR";
-    final String USERNAME = "simu";
-    final String PASSWORD = "simu";
+    private final String URL = "jdbc:mysql://localhost/SIMULATOR";
+    private final String USERNAME = "simu";
+    private final String PASSWORD = "simu";
 
     private class RunItem
     {
-        public int run_id;
-        public long run_time;
-        public int simulator_time;
+        private int run_id;
+        private long run_time;
+        private int simulator_time;
     }
 
     private Connection getConnection(){
@@ -27,6 +32,13 @@ public class StatsDAO {
         return null;
     }
 
+    /**
+     * Setup RUN table.
+     * This is the "base" for the whole simulation statistics.
+     *
+     * @param simulatorTime the simulation time length
+     * @return amount of rows affected
+     */
     public int setupRunTable(int simulatorTime){
         try(Connection connection = this.getConnection()){
             PreparedStatement statement = connection.prepareStatement("INSERT INTO RUN (run_time, simulator_time) VALUES (?, ?);", Statement.RETURN_GENERATED_KEYS);
@@ -51,6 +63,13 @@ public class StatsDAO {
         return 0;
     }
 
+    /**
+     * Save service point to database.
+     * SERVICEPOINT and RUN tables are linked with RUN_ID
+     *
+     * @param servicePointStatistic the servicepoint statistic object
+     * @param run_id                the run_id used to link the servicepoint to the correct simulation run
+     */
     public void saveServicePoint(ServicePointStatistic servicePointStatistic, int run_id){
         try(Connection connection = this.getConnection()){
             PreparedStatement statement = connection.prepareStatement("INSERT INTO SERVICEPOINT (run_id, name, busy_time, service_times, utilization, avg_servicetime) VALUES (?, ?, ?, ?, ?, ?);");
@@ -93,6 +112,11 @@ public class StatsDAO {
         return items;
     }
 
+    /**
+     * Get all simulator statistics in an arraylist form.
+     *
+     * @return the array list with simulator statistics
+     */
     public ArrayList<SimulatorStatistics> getAllSimulatorStatistics(){
         ArrayList<SimulatorStatistics> simulatorStatistics = new ArrayList<>();
         ArrayList<RunItem> runItems =  getRunResultSet();
@@ -111,7 +135,7 @@ public class StatsDAO {
                             resultSet.getInt(5), resultSet.getDouble(6), resultSet.getDouble(7));
                     i++;
                 }
-                simulatorStatistics.add(new SimulatorStatistics(item.run_id,item.simulator_time, item.run_time, servicePointStatistics));
+                simulatorStatistics.add(new SimulatorStatistics(item.simulator_time, item.run_time, servicePointStatistics));
             }
 
         }catch (SQLException e){

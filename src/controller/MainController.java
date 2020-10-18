@@ -12,6 +12,9 @@ import view.MainApplication;
 import javafx.event.ActionEvent;
 import java.io.IOException;
 
+/**
+ * The Main controller used to interact with the general settings and the main menu.
+ */
 public class MainController {
 
     private AdvancedSettingsController advancedSettingsController;
@@ -26,10 +29,20 @@ public class MainController {
     @FXML
     private MenuBar menuBar;
 
+    /**
+     * Instantiates a new Main controller.
+     * Create an advanced settings controller to save all of the advanced settings values between scenes.
+     */
     public MainController(){
         this.advancedSettingsController = new AdvancedSettingsController(this);
     }
 
+    /**
+     * Initialize advanced settings controller into a scene.
+     * Scene is then stored for future use.
+     *
+     * @throws IOException the io exception
+     */
     @FXML
     public void initialize() throws IOException {
         FXMLLoader settingsLoad = new FXMLLoader(MainApplication.class.getResource("fxml/advancedSettings.fxml"));
@@ -38,6 +51,14 @@ public class MainController {
         this.settings = new Scene(vBox);
     }
 
+    /**
+     * Past results button action.
+     * Past results button action navigates to the window where the simulator runs are stored.
+     * This button also loads a new instance of simulation statistics
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     @FXML
     public void pastResultsButton(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage) menuBar.getScene().getWindow();
@@ -47,6 +68,12 @@ public class MainController {
         primaryStage.setScene(new Scene(vBox));
     }
 
+    /**
+     * Faq button action used to access some faq questions from the main menu.
+     * Creates a new instance of faq page window.
+     *
+     * @throws IOException the io exception
+     */
     @FXML
     public void faqButton() throws IOException {
         FXMLLoader faqLoad = new FXMLLoader(MainApplication.class.getResource("fxml/faqPage.fxml"));
@@ -58,6 +85,12 @@ public class MainController {
         stage.show();
     }
 
+    /**
+     * Advanced settings button action opens the advanced settings scene that is stored in mainController.
+     * MainMenu scene is also saved before opening advanced setting to preserve the values in manuMenu
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     public void advancedSettings(ActionEvent actionEvent){
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -65,6 +98,15 @@ public class MainController {
         primaryStage.setScene(this.settings);
     }
 
+    /**
+     * Run simulation button action.
+     * This verifies the mainmenu settings fields to ensure that the base settings are correct.
+     * After that it passes advancedsettings and main menu to the simulator controller.
+     * This also generates a new instance of the simulator view.
+     *
+     * @param actionEvent the action event
+     * @throws IOException the io exception
+     */
     @FXML
     public void runSimulation(ActionEvent actionEvent) throws IOException {
         if(!this.verifyFields()){
@@ -117,22 +159,38 @@ public class MainController {
         return result;
     }
 
+    /**
+     * Gets main menu scene.
+     *
+     * @return the main menu
+     */
     public Scene getMainMenu() {
         return mainMenu;
     }
 
-    public void setMainMenu(Scene mainMenu) {
-        this.mainMenu = mainMenu;
-    }
-
+    /**
+     * Gets sample size setting.
+     *
+     * @return the sample size
+     */
     public double getSampleSize() {
         return sampleSize.getValue();
     }
 
+    /**
+     * Gets simulation time time setting.
+     *
+     * @return the simulation time
+     */
     public int getSimulationTime() {
         return Integer.parseInt(simulationTime.getText());
     }
 
+    /**
+     * Gets virus probability setting.
+     *
+     * @return the virus probability
+     */
     public int getVirusProbability() {
         return Integer.parseInt(virusProbability.getText());
     }

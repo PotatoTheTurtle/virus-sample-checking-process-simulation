@@ -1,22 +1,29 @@
 package controller;
 
-import javafx.animation.Animation;
-import javafx.animation.PathTransition;
-import javafx.application.Platform;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Polyline;
-import javafx.util.Duration;
-
-
+/**
+ * The tracker is used to set the correct circle visible during the simulation.
+ */
 public class Tracker {
 
 
     private SimulatorController simulatorController;
 
+    /**
+     * Instantiates a new Tracker.
+     * Simulator controller is used the get the circle fxml
+     *
+     * @param simulatorController the simulator controller
+     */
     public Tracker(SimulatorController simulatorController){
         this.simulatorController = simulatorController;
     }
 
+    /**
+     * Set circle status.
+     *
+     * @param id      the id of the servicepoint
+     * @param visible is visible bool
+     */
     public void setCircleStatus(int id, boolean visible){
         switch (id){
             case 0:
@@ -37,6 +44,13 @@ public class Tracker {
         }
     }
 
+    /**
+     * Set skip circle during simulation.
+     * Can only set the skip circle if servicepoint is skippable
+     *
+     * @param id      the id of the servicepoint
+     * @param visible is visible bool
+     */
     public void setSkipCircle(int id, boolean visible){
         switch (id){
             case 2:
@@ -51,6 +65,13 @@ public class Tracker {
         }
     }
 
+    /**
+     * Set servicepoint label.
+     * Used to indicate how many are samples are in the queue.
+     *
+     * @param id          the id of the servicepoint
+     * @param queueAmount the queue amount
+     */
     public void setServicepointLabel(int id, int queueAmount){
         switch (id){
             case 0:
@@ -67,43 +88,6 @@ public class Tracker {
                 break;
             case 4:
                     this.simulatorController.setLabel4("Human verification\nsamples: " + queueAmount);
-                break;
-        }
-    }
-
-    // TODO: Animations
-    public void moveSample(int id){
-        PathTransition transition = new PathTransition();
-        switch (id){
-            case 0:
-                this.simulatorController.getCircle0_1().setVisible(true);
-                System.out.println(this.simulatorController.getCircle1().getBoundsInParent());
-                System.out.println(this.simulatorController.getCircle0_1().getBoundsInParent());
-                System.out.println(this.simulatorController.getPolyline0_1());
-
-                Polyline polyline = new Polyline();
-                polyline.getPoints().addAll(new Double[]{
-                        63.0, 0.0,
-                        215.0, 0.0
-                });
-
-                transition.setNode(this.simulatorController.getCircle0_1());
-                transition.setDuration(Duration.seconds(2));
-                transition.setPath(polyline);
-                transition.setCycleCount(Animation.INDEFINITE);
-                transition.play();
-                break;
-            case 1:
-                this.simulatorController.getCircle1().setVisible(false);
-                break;
-            case 2:
-                this.simulatorController.getCircle2().setVisible(false);
-                break;
-            case 3:
-                this.simulatorController.getCircle3().setVisible(false);
-                break;
-            case 4:
-                this.simulatorController.getCircle4().setVisible(false);
                 break;
         }
     }

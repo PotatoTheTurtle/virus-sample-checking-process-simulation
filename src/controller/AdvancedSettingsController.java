@@ -11,6 +11,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The Advanced settings controller using fxml.
+ * This controller is used to store the advanced settings that are then passed to the simulaiton
+ */
 public class AdvancedSettingsController {
 
     private MainController mainController;
@@ -43,18 +47,31 @@ public class AdvancedSettingsController {
     @FXML
     private TextField submissionMin, submissionMax;
 
+    /**
+     * Instantiates a new Advanced settings controller.
+     *
+     * @param mainController the main controller, used for saving the values between scenes
+     */
     public AdvancedSettingsController(MainController mainController){
         this.mainController = mainController;
     }
 
+    /**
+     * Back button action from advanced settings to main menu
+     * Loads the stored maincontroller to chanse scene, this ensures that the maincontroller values stay the same.
+     * @param actionEvent the action event
+     */
     @FXML
-    public void backSettings(ActionEvent actionEvent) throws IOException {
+    public void backSettings(ActionEvent actionEvent) {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
 
         // Load saved main menu.
         primaryStage.setScene(this.mainController.getMainMenu());
     }
 
+    /**
+     * Reset advanced settings to its default values.
+     */
     @FXML
     public void resetSettings(){
         this.virusSampleSubmissionMin.setText(String.valueOf(this.virusSampleSubmissionMinDefault));
@@ -73,6 +90,12 @@ public class AdvancedSettingsController {
 
     // Methods to verify that the field contains numbers, if not then use default value.
 
+    /**
+     * Get virus submission generator
+     * Method used to verify that the field contains numbers, if not then use default value.
+     * If field is invalid then use default values
+     * @return the generator.
+     */
     public ContinuousGenerator getVirusSampleSubmissionGenerator(){
         if(!virusSampleSubmissionMin.getText().isEmpty() && !virusSampleSubmissionMax.getText().isEmpty()){
             if(virusSampleSubmissionMin.getText().matches("\\d*") && virusSampleSubmissionMax.getText().matches("\\d*")){
@@ -82,6 +105,12 @@ public class AdvancedSettingsController {
         return new Uniform(this.virusSampleSubmissionMinDefault, this.virusSampleSubmissionMaxDefault);
     }
 
+    /**
+     * Get backend scan generator
+     * Method used to verify that the field contains numbers, if not then use default value.
+     * If field is invalid then use default values
+     * @return the generator.
+     */
     public ContinuousGenerator getBackendScanGenerator(){
         if(!backendScanMin.getText().isEmpty() && !backendScanMax.getText().isEmpty()){
             if(backendScanMin.getText().matches("\\d*") && backendScanMax.getText().matches("\\d*")){
@@ -91,6 +120,12 @@ public class AdvancedSettingsController {
         return new Uniform(this.backendScanMinDefault, this.backendScanMaxDefault);
     }
 
+    /**
+     * Get robot verification 1 generator
+     * Method used to verify that the field contains numbers, if not then use default value.
+     * If field is invalid then use default values
+     * @return the generator.
+     */
     public ContinuousGenerator getRobotVerify1Generator(){
         if(!robotVerify1Min.getText().isEmpty() && !robotVerify1Max.getText().isEmpty()){
             if(robotVerify1Min.getText().matches("\\d*") && robotVerify1Max.getText().matches("\\d*")){
@@ -100,6 +135,12 @@ public class AdvancedSettingsController {
         return new Uniform(this.robotVerify1MinDefault, this.robotVerify1MaxDefault);
     }
 
+    /**
+     * Get robot verification 2 generator
+     * Method used to verify that the field contains numbers, if not then use default value.
+     * If field is invalid then use default values
+     * @return the generator.
+     */
     public ContinuousGenerator getRobotVerify2Generator(){
         if(!robotVerify2Min.getText().isEmpty() && !robotVerify2Max.getText().isEmpty()){
             if(robotVerify2Min.getText().matches("\\d*") && robotVerify2Max.getText().matches("\\d*")){
@@ -109,6 +150,12 @@ public class AdvancedSettingsController {
         return new Uniform(this.robotVerify2MinDefault, this.robotVerify2MaxDefault);
     }
 
+    /**
+     * Get human verification generator
+     * Method used to verify that the field contains numbers, if not then use default value.
+     * If field is invalid then use default values
+     * @return the generator.
+     */
     public ContinuousGenerator getHumanVerificationGenerator(){
         if(!humanVerifyMin.getText().isEmpty() && !humanVerifyMax.getText().isEmpty()){
             if(humanVerifyMin.getText().matches("\\d*") && humanVerifyMax.getText().matches("\\d*")){
@@ -118,6 +165,12 @@ public class AdvancedSettingsController {
         return new Uniform(this.humanVerifyMinDefault, this.humanVerifyMaxDefault);
     }
 
+    /**
+     * Get submission rate generator
+     * Method used to verify that the field contains numbers, if not then use default value.
+     * If field is invalid then use default values
+     * @return the generator.
+     */
     public ContinuousGenerator getSubmissionGenerator(){
         if(!submissionMin.getText().isEmpty() && !submissionMax.getText().isEmpty()){
             if(submissionMin.getText().matches("\\d*") && submissionMax.getText().matches("\\d*")){

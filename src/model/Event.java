@@ -1,34 +1,48 @@
 package model;
 
 
+/**
+ * The type Event.
+ */
 public class Event implements Comparable<Event> {
 	
 		
-	private EventType tyyppi;
-	private double aika;
-	
-	public Event(EventType tyyppi, double aika){
-		this.tyyppi = tyyppi;
-		this.aika = aika;
+	private EventType eventType;
+	private double time;
+
+	/**
+	 * Instantiates a new Event.
+	 *
+	 * @param eventType assign the event type
+	 * @param time the time to be assigned
+	 */
+	public Event(EventType eventType, double time){
+		this.eventType = eventType;
+		this.time = time;
 	}
-	
-	public void setTyyppi(EventType tyyppi) {
-		this.tyyppi = tyyppi;
+
+	/**
+	 * Get event type.
+	 *
+	 * @return the event type
+	 */
+	public EventType getType() {
+		return eventType;
 	}
-	public EventType getTyyppi() {
-		return tyyppi;
-	}
-	public void setAika(double aika) {
-		this.aika = aika;
-	}
-	public double getAika() {
-		return aika;
+
+	/**
+	 * Gets event time.
+	 *
+	 * @return the event time
+	 */
+	public double getTime() {
+		return time;
 	}
 
 	@Override
 	public int compareTo(Event arg) {
-		if (this.aika < arg.aika) return -1;
-		else if (this.aika > arg.aika) return 1;
+		if (this.time < arg.time) return -1;
+		else if (this.time > arg.time) return 1;
 		return 0;
 	}
 	
